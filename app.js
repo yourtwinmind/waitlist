@@ -567,4 +567,22 @@ async function submitToNotion(email) {
         
         console.log('=== INICJALIZACJA ZAKOŃCZONA POMYŚLNIE ===');
     }, 3000);
+    // Test connection to FormSpree
+async function testFormSpreeConnection() {
+    console.log('Testowanie połączenia z FormSpree...');
+    try {
+        const testResult = await submitToNotion('test@yourtwinmind.com');
+        if (testResult.success) {
+            console.log('✅ FormSpree działa poprawnie!');
+        } else {
+            console.log('❌ Problem z FormSpree:', testResult.error);
+        }
+    } catch (error) {
+        console.log('❌ Błąd testu FormSpree:', error);
+    }
+}
+
+// Uruchom test po 5 sekundach (opcjonalne)
+// setTimeout(testFormSpreeConnection, 5000);
+
 });
