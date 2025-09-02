@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Twin Mind - Lista oczekujących</title>
+    
+    <!-- Import HORIZON font with Polish support -->
+    <link rel="preconnect" href="https://fonts.cdnfonts.com">
+    
+    <!-- Import Montserrat from Google Fonts with Polish support -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&subset=latin,latin-ext&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="main-container">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container">
+                <!-- Logo -->
+                <div class="logo-container">
+                    <svg class="logo-svg" viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Neural Network Visualization -->
+                        <defs>
+                            <linearGradient id="nodeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#32B8C6;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#2DA6B2;stop-opacity:1" />
+                            </linearGradient>
+                            <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#32B8C6;stop-opacity:0.8" />
+                                <stop offset="50%" style="stop-color:#2DA6B2;stop-opacity:0.6" />
+                                <stop offset="100%" style="stop-color:#32B8C6;stop-opacity:0.8" />
+                            </linearGradient>
+                            <filter id="glow">
+                                <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                                <feMerge> 
+                                    <feMergeNode in="coloredBlur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        
+                        <!-- Neural Network Connections -->
+                        <g class="connections" stroke="url(#lineGradient)" stroke-width="1" fill="none" opacity="0.7">
+                            <line x1="30" y1="30" x2="70" y2="25" />
+                            <line x1="30" y1="30" x2="70" y2="35" />
+                            <line x1="30" y1="50" x2="70" y2="25" />
+                            <line x1="30" y1="50" x2="70" y2="35" />
+                            <line x1="30" y1="50" x2="70" y2="45" />
+                            <line x1="70" y1="25" x2="110" y2="30" />
+                            <line x1="70" y1="35" x2="110" y2="30" />
+                            <line x1="70" y1="35" x2="110" y2="40" />
+                            <line x1="70" y1="45" x2="110" y2="40" />
+                            <line x1="70" y1="45" x2="110" y2="50" />
+                            <line x1="110" y1="30" x2="150" y2="35" />
+                            <line x1="110" y1="40" x2="150" y2="35" />
+                            <line x1="110" y1="50" x2="150" y2="45" />
+                        </g>
+                        
+                        <!-- Neural Network Nodes -->
+                        <g class="nodes" fill="url(#nodeGradient)" filter="url(#glow)">
+                            <!-- Input layer -->
+                            <circle cx="30" cy="30" r="4" class="node" />
+                            <circle cx="30" cy="50" r="4" class="node" />
+                            
+                            <!-- Hidden layer 1 -->
+                            <circle cx="70" cy="25" r="5" class="node" />
+                            <circle cx="70" cy="35" r="5" class="node" />
+                            <circle cx="70" cy="45" r="5" class="node" />
+                            
+                            <!-- Hidden layer 2 -->
+                            <circle cx="110" cy="30" r="4.5" class="node" />
+                            <circle cx="110" cy="40" r="4.5" class="node" />
+                            <circle cx="110" cy="50" r="4.5" class="node" />
+                            
+                            <!-- Output layer -->
+                            <circle cx="150" cy="35" r="5.5" class="node-output" />
+                            <circle cx="150" cy="45" r="5.5" class="node-output" />
+                        </g>
+                        
+                        <!-- Logo Text -->
+                        <g class="logo-text">
+                            <text x="180" y="35" font-family="Montserrat, sans-serif" font-size="16" font-weight="700" fill="#32B8C6" filter="url(#glow)">YOUR</text>
+                            <text x="180" y="52" font-family="Montserrat, sans-serif" font-size="16" font-weight="700" fill="#32B8C6" filter="url(#glow)">TWIN</text>
+                            <text x="180" y="69" font-family="Montserrat, sans-serif" font-size="16" font-weight="700" fill="#32B8C6" filter="url(#glow)">MIND</text>
+                        </g>
+                        
+                        <!-- Subtle animation elements -->
+                        <g class="pulse-rings" fill="none" stroke="#32B8C6" stroke-width="1" opacity="0.3">
+                            <circle cx="150" cy="40" r="20" class="pulse-ring" />
+                            <circle cx="150" cy="40" r="25" class="pulse-ring-2" />
+                        </g>
+                    </svg>
+                </div>
+
+                <div class="hero-content">
+                    <h1 class="hero-title">Lista oczekujących</h1>
+                    <p class="hero-subtitle">Bądź pierwszą osobą, która dowie się o naszych nowych produktach AI</p>
+                    <p class="hero-description">Zapisz się na naszą listę oczekujących i otrzymaj powiadomienie o premierze naszych produktów cyfrowych oraz ekskluzywne oferty dla early adopters.</p>
+                    
+                    <!-- Test polskich znaków -->
+                    <p class="polish-test">Testowanie polskich znaków: ąćęłńóśźż ĄĆĘŁŃÓŚŹŻ</p>
+                </div>
+
+                <!-- Waitlist Form -->
+                <form class="waitlist-form" id="waitlistForm">
+                    <div class="form-group">
+                        <label for="email" class="form-label">Adres e-mail</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            class="form-control email-input" 
+                            placeholder="Twój adres e-mail" 
+                            required 
+                            aria-describedby="email-error"
+                            accept-charset="UTF-8"
+                            spellcheck="false"
+                            autocomplete="email"
+                        >
+                        <span class="error-message" id="email-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="checkbox-container">
+                            <input 
+                                type="checkbox" 
+                                id="consent" 
+                                name="consent" 
+                                class="checkbox-input" 
+                                required
+                                aria-describedby="consent-error"
+                            >
+                            <label for="consent" class="checkbox-label">
+                                Wyrażam zgodę na przetwarzanie mojego adresu e-mail w celu powiadomienia o dostępności produktów cyfrowych oraz przesyłania informacji marketingowych zgodnie z
+                                <span class="privacy-link" role="button" tabindex="0" id="privacyPolicyBtn">polityką prywatności</span>.
+                            </label>
+                        </div>
+                        <span class="error-message" id="consent-error"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn--primary btn--full-width submit-btn" id="submitBtn">
+                        <span class="btn-text">Dołącz do waitlisty</span>
+                        <span class="loading-spinner hidden" id="loadingSpinner"></span>
+                    </button>
+                </form>
+
+                <!-- Status Messages -->
+                <div class="status-messages">
+                    <div class="status-message success-message hidden" id="successMessage">
+                        <div class="status-icon">✓</div>
+                        <p>Dziękujemy! Zostałeś/aś dodany/a do listy oczekujących.</p>
+                    </div>
+                    <div class="status-message error-message hidden" id="errorMessage">
+                        <div class="status-icon">⚠</div>
+                        <p>Wystąpił błąd. Spróbuj ponownie.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Privacy Policy Modal -->
+    <div class="modal hidden" id="privacyModal">
+        <div class="modal-backdrop" id="modalBackdrop"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Polityka Prywatności - Lista Oczekujących</h2>
+                <button type="button" class="modal-close" id="closeModal" aria-label="Zamknij">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="privacy-content">
+                    <p>1. Administratorem danych osobowych jest Your Twin Mind.</p>
+                    <p>2. Twój adres e-mail będzie przetwarzany w celu powiadomienia Cię o dostępności naszych produktów cyfrowych AI.</p>
+                    <p>3. Podstawą prawną przetwarzania jest Twoja dobrowolna zgoda (art. 6 ust. 1 lit. a RODO).</p>
+                    <p>4. Dane będą przechowywane do czasu cofnięcia zgody lub realizacji celu.</p>
+                    <p>5. Masz prawo do wycofania zgody, dostępu do danych, ich sprostowania, usunięcia oraz przenoszenia.</p>
+                    <p>6. Możesz wycofać zgodę wysyłając e-mail na: kontakt@yourtwinmind.com.</p>
+                    <p>7. Dane nie będą przekazywane do krajów trzecich.</p>
+                    <p>8. W przypadku pytań lub skarg możesz skontaktować się z nami lub z UODO.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn--secondary" id="closeModalBtn">Zamknij</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
