@@ -214,52 +214,47 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Enhanced Notion integration simulation with Polish character support
-    async function submitToNotion(email) {
-        // DEMO VERSION - Replace with real API endpoint
-        const MOCK_API_ENDPOINT = '/api/waitlist/subscribe';
-        
-        // Simulate network delay
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        
-        try {
-            // Demo mode - logging with Polish character test
-            console.log('DEMO MODE: Zapisywanie do Your Twin Mind waitlisty', { 
-                email, 
-                timestamp: new Date().toISOString(),
-                source: 'your-twin-mind-waitlist',
-                company: 'Your Twin Mind',
-                polishCharsTest: 'ąćęłńóśźż ĄĆĘŁŃÓŚŹŻ',
-                fontSupport: document.body.classList.contains('horizon-loaded') ? 'HORIZON' : 'Fallback',
-                emailLength: email.length,
-                hasPolishChars: /[ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]/.test(email)
-            });
-            
-            // Simulate high success rate (97%)
-            const simulateError = Math.random() < 0.03;
-            
-            if (simulateError) {
-                throw new Error('Symulowany błąd połączenia sieciowego');
-            }
-            
-            // Simulate successful response
-            return { 
-                success: true, 
-                demo: true, 
+   // FormSpree integration with Polish character support
+async function submitToNotion(email) {
+    try {
+        // FormSpree endpoint - ZMIEŃ NA SWÓJ ENDPOINT!
+        const response = await fetch('https://formspree.io/f/TWOJ_ENDPOINT_ID', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
                 email: email,
-                id: 'demo_' + Date.now(),
+                zgoda_rodo: 'Tak',
+                data_zapisu: new Date().toISOString(),
+                źródło: 'Your Twin Mind Landing page waitlist',
+                company: 'Your Twin Mind',
+                język: 'polski',
+                font_support: document.body.classList.contains('horizon-loaded') ? 'HORIZON' : 'Fallback'
+            })
+        });
+
+        if (response.ok) {
+            console.log('Email pomyślnie wysłany przez FormSpree:', email);
+            return {
+                success: true,
+                email: email,
                 message: 'Pomyślnie dodano do listy oczekujących Your Twin Mind'
             };
-            
-        } catch (error) {
-            console.error('Błąd podczas zapisywania do Notion:', error);
-            return { 
-                success: false, 
-                error: error.message,
-                timestamp: new Date().toISOString()
-            };
+        } else {
+            const errorText = await response.text();
+            throw new Error(`FormSpree error: ${response.status} - ${errorText}`);
         }
+    } catch (error) {
+        console.error('Błąd podczas wysyłania przez FormSpree:', error);
+        return {
+            success: false,
+            error: error.message,
+            timestamp: new Date().toISOString()
+        };
     }
+}
+
 
     // Form submission handler
     async function handleFormSubmission(event) {
