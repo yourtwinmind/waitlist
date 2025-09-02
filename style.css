@@ -1357,9 +1357,9 @@ body {
   font-variant-numeric: lining-nums;
   font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
 }
-.hidden {
+/* .hidden {
   display: none !important;
-}
+} */
 /* (opcjonalnie) chowanie tylko dla status-message */
 .status-message.hidden {
   display: none !important;

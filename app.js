@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
     // --- Teksty w jednym miejscu ---
     const MESSAGES = {
-      success: 'Dziękujemy! Zostałeś/aś dodany/a do listy oczekujących.',
+      success: 'Artur... masakra z Tobą :-) umiesz mnie zmotywować!',
       errorGeneric: 'Wystąpił błąd. Spróbuj ponownie.',
       errorValidationAll: 'Wypełnij wszystkie wymagane pola poprawnie',
       errorEmailInvalid: 'Podaj prawidłowy adres e-mail',
