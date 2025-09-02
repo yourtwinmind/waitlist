@@ -1360,3 +1360,6 @@ body {
 .hidden {
   display: none !important;
 }
+.error-message:empty {
+  display: none;
+}
