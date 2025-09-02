@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', function() {
 async function submitToNotion(email) {
     try {
         // FormSpree endpoint - ZMIEŃ NA SWÓJ ENDPOINT!
-        const response = await fetch('https://formspree.io/f/TWOJ_ENDPOINT_ID', {
+        const response = await fetch('https://formspree.io/f/mblaaygr', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
