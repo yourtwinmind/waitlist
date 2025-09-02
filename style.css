@@ -1361,9 +1361,9 @@ body {
   display: none !important;
 } */
 /* (opcjonalnie) chowanie tylko dla status-message */
-.status-message.hidden {
+/* .status-message.hidden {
   display: none !important;
-}
+} */
 .error-message:empty {
   display: none;
 }
