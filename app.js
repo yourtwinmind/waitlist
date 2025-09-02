@@ -45,48 +45,57 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   
     // --- Pomocnicze ---
-    const hideStatusMessages = () => {
-      if (successMessage) successMessage.classList.add('hidden');
-      if (errorMessage) errorMessage.classList.add('hidden');
-    };
-  
-    const setLoadingState = (isLoading) => {
-      if (!submitBtn || !btnText || !loadingSpinner || !form) return;
-      submitBtn.disabled = isLoading;
-      btnText.textContent = isLoading ? MESSAGES.submitting : MESSAGES.submitIdle;
-      loadingSpinner.classList.toggle('hidden', !isLoading);
-      form.classList.toggle('form-submitting', isLoading);
-    };
-  
-    const setText = (el, text) => {
-      if (!el) return;
-      const p = el.querySelector('p');
-      if (p) p.textContent = text;
-    };
-  
-    const showSuccessMessage = (text = MESSAGES.success) => {
-      hideStatusMessages();
+    let __successHideTimeout = null;
+
+    function hideStatusMessages() {
+      if (successMessage) {
+        successMessage.classList.add('hidden');
+        successMessage.style.display = 'none';
+      }
+      if (errorMessage) {
+        errorMessage.classList.add('hidden');
+        errorMessage.style.display = 'none';
+      }
+      if (__successHideTimeout) {
+        clearTimeout(__successHideTimeout);
+        __successHideTimeout = null;
+      }
+    }
+    
+    function showSuccessMessage(text = MESSAGES.success) {
+      // schowaj error zanim pokażesz success
+      if (errorMessage) {
+        errorMessage.classList.add('hidden');
+        errorMessage.style.display = 'none';
+      }
       if (successMessage) {
         setText(successMessage, text);
         successMessage.classList.remove('hidden');
+        successMessage.style.display = 'flex';   // <- pokaż na pewno
         successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        // auto-hide po 8s (jak w Twojej wersji)
-        setTimeout(() => {
-          if (!successMessage.classList.contains('hidden')) {
-            successMessage.classList.add('hidden');
-          }
+    
+        if (__successHideTimeout) clearTimeout(__successHideTimeout);
+        __successHideTimeout = setTimeout(() => {
+          successMessage.classList.add('hidden');
+          successMessage.style.display = 'none';
+          __successHideTimeout = null;
         }, 8000);
       }
-    };
-  
-    const showErrorMessage = (text = MESSAGES.errorGeneric) => {
-      hideStatusMessages();
+    }
+    
+    function showErrorMessage(text = MESSAGES.errorGeneric) {
+      // schowaj success zanim pokażesz error
+      if (successMessage) {
+        successMessage.classList.add('hidden');
+        successMessage.style.display = 'none';
+      }
       if (errorMessage) {
         setText(errorMessage, text);
         errorMessage.classList.remove('hidden');
+        errorMessage.style.display = 'flex';     // <- pokaż na pewno
         errorMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
-    };
+    }
   
     const showFieldError = (el, text) => {
       if (!el) return;
