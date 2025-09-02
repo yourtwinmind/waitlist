@@ -1357,3 +1357,6 @@ body {
   font-variant-numeric: lining-nums;
   font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
 }
+.hidden {
+  display: none !important;
+}
