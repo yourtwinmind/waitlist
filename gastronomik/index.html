@@ -1,0 +1,691 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Sztuczna inteligencja w pracy nauczyciela i ucznia</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 99, 174, 0.172); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="261db654-06ed-80ae-bc53-cd2b573681d6" class="page sans"><header><img class="page-cover-image" src="Sztuczna%20inteligencja%20w%20pracy%20nauczyciela%20i%20ucznia%20261db65406ed80aebc53cd2b573681d6/Wer_3_dark.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">📗</span></div><h1 class="page-title">Sztuczna inteligencja w pracy nauczyciela i ucznia</h1><p class="page-description"></p></header><div class="page-body"><h2 id="71c2d1f9-925f-46bd-beb9-319ea605f255" class=""><strong>Praktyczne zastosowania w edukacji gastronomicznej</strong></h2><p id="7e6c5523-823b-4ece-84b5-de8f6f46cc46" class="">👋 Jeszcze raz dziękujemy za udział w szkoleniu!</p><p id="73e77f60-aed4-4549-978c-7ab66e700439" class="">To było wyjątkowe spotkanie – pełne pytań, dyskusji i inspiracji.</p><p id="214b937b-d267-4e68-8eb0-054acd5436e8" class="">Pokazaliście nam, że nauczyciele są otwarci na nowe technologie i chcą je poznawać, aby uczniowie mogli korzystać z nich mądrze i bezpiecznie.</p><hr id="1f089d18-b75d-46f2-aede-d7ce0cc14e4d"/><h2 id="500bd161-0ba0-471d-b4f0-c1ab50775445" class="">🔑 Agenda spotkania</h2><ul id="ff9e4c0b-e7bf-430d-83d1-bcbb508a1d24" class="bulleted-list"><li style="list-style-type:disc">Let’s humanize AI</li></ul><ul id="7879b2b5-f97f-4382-8853-259fde0e02d9" class="bulleted-list"><li style="list-style-type:disc">Co to jest AI i gdzie można spotkać sztuczną inteligencję w codziennym życiu</li></ul><ul id="19642a4a-4edf-41a2-9fb6-5c25bdbc2b89" class="bulleted-list"><li style="list-style-type:disc">Canva AI – praktyczne zastosowania</li></ul><ul id="377ad25c-0977-4c79-abc1-cc36dbdb9f52" class="bulleted-list"><li style="list-style-type:disc">MidJourney – zdjęcie, które staje się filmem</li></ul><ul id="0a9f5217-b7f3-474e-8ef6-2fd1b637074c" class="bulleted-list"><li style="list-style-type:disc">NotebookLM – Twój osobisty asystent wiedzy</li></ul><ul id="f8d7a805-3e0e-47e6-9e2d-7bd6d0e3c2ee" class="bulleted-list"><li style="list-style-type:disc">Halucynacje AI – na co uważać</li></ul><ul id="9cbe8e0a-c82f-43b8-9f23-39f9786e914a" class="bulleted-list"><li style="list-style-type:disc">Sesja pytań i odpowiedzi</li></ul><hr id="e0603609-30a3-4673-b01e-7a0d12ca440f"/><h2 id="cd390d6a-f3aa-43f4-8be2-227d4bc3db93" class="">📂 Materiały</h2><p id="088620e6-0caa-4664-a084-3390cbf64d76" class="">📑 <strong>Prezentacja ze szkolenia:</strong></p><figure id="261db654-06ed-802b-bb88-d680cd1f178a"><div class="source"><a href="Sztuczna%20inteligencja%20w%20pracy%20nauczyciela%20i%20ucznia%20261db65406ed80aebc53cd2b573681d6/Sztuczna_inteligencja_w_pracy_nauczyciela_i_ucznia__praktyczne_zastosowania_w_edukacji_gastronomiczne.pdf">Sztuczna inteligencja w pracy nauczyciela i ucznia – praktyczne zastosowania w edukacji gastronomiczne.pdf</a></div></figure><p id="9303635f-2aab-418b-a3b4-c310989fb9a9" class="">🌐 <strong>Canva – dokumentacja</strong> → <a href="http://help.canva.com">help.canva.com</a></p><p id="ecfb371e-5db3-4b3c-8b43-e022f2e7e824" class="">🖼️ <strong>NotebookLM:</strong></p><figure id="263db654-06ed-803e-ac21-f4c1f5132f59"><div class="source"><a href="Sztuczna%20inteligencja%20w%20pracy%20nauczyciela%20i%20ucznia%20261db65406ed80aebc53cd2b573681d6/Pracuj_sprytniej_nie_ciezej._.pdf">Pracuj sprytniej, nie ciężej. .pdf</a></div></figure><hr id="aa862087-943b-4c2e-b269-e6b9db23871f"/><h2 id="f9b2c0ed-e0db-48bf-9476-fcd4f56e8d39" class="">🤖 Gdzie spotykamy AI na co dzień?</h2><p id="92137e8e-857c-4c26-af53-8b2d305638ba" class="">Sztuczna inteligencja nie jest już futurystycznym wynalazkiem – korzystamy z niej wszyscy, często nawet o tym nie wiedząc:</p><ul id="07e4a647-2376-4b72-a274-28a485dafa3a" class="bulleted-list"><li style="list-style-type:disc">🎬 <strong>Netflix, YouTube, Spotify</strong> – podpowiadają filmy i muzykę dopasowane do naszego gustu.</li></ul><ul id="f2595672-9634-43e6-aa75-79d685774145" class="bulleted-list"><li style="list-style-type:disc">📍 <strong>Google Maps</strong> – wyznacza najlepszą trasę i przewiduje korki.</li></ul><ul id="6ab4ba34-599b-4391-9f8b-6f77a2b2e987" class="bulleted-list"><li style="list-style-type:disc">🌍 <strong>Tłumacze online</strong> (DeepL, Google Translate) – wspierają w komunikacji w różnych językach.</li></ul><ul id="be900677-78cc-42ae-ae36-734fe09845e8" class="bulleted-list"><li style="list-style-type:disc">📸 <strong>Aparaty w telefonach</strong> – poprawiają zdjęcia, rozpoznają twarze, filtrują obraz.</li></ul><ul id="3b596775-a4aa-4408-ae6c-282f454efdfa" class="bulleted-list"><li style="list-style-type:disc">📧 <strong>Filtry antyspamowe w poczcie</strong> – oddzielają ważne wiadomości od spamu.</li></ul><ul id="4ea01ce8-d902-4879-9b01-141e051bbb3b" class="bulleted-list"><li style="list-style-type:disc">🛒 <strong>Sklepy internetowe</strong> – proponują produkty, które mogą nas zainteresować.</li></ul><ul id="1c79d428-5415-4082-973b-67c58ef9e0ff" class="bulleted-list"><li style="list-style-type:disc">🗣️ <strong>Asystenci głosowi</strong> (Siri, Alexa, Asystent Google) – odpowiadają na pytania, sterują urządzeniami.</li></ul><ul id="97b05f68-ce35-44f4-8aa1-15a4197903ea" class="bulleted-list"><li style="list-style-type:disc">📚 <strong>Aplikacje edukacyjne</strong> (Duolingo, Quizlet) – dopasowują poziom nauki do ucznia.</li></ul><p id="80303d04-d1f4-4a65-ae1b-c8317e783e5a" class="">👉 To pokazuje, że AI to nie „obcy twór”, ale <strong>narzędzie, które już od lat ułatwia nam życie</strong>. W edukacji może być tak samo – jeśli użyjemy jej mądrze.</p><hr id="261db654-06ed-809c-ba5f-eb8a57db3a80"/><h2 id="08762ddc-1561-4949-867b-d8ff3481d051" class="">🎨 Canva AI – więcej niż projektowanie</h2><p id="fb100c50-5d97-477f-b6fc-d76dbba276a0" class="">Canva to coś więcej niż narzędzie do slajdów. Dzięki funkcjom AI możecie:</p><p id="1d7bf90e-b29c-4915-96a2-311f29427371" class="">✨ stworzyć prezentację w kilka sekund z krótkiego promptu,</p><p id="63189d90-98ce-4983-b652-864729088c43" class="">✨ generować ilustracje, plakaty czy zaproszenia na lekcje,</p><p id="c416a789-7f12-40dc-8fb9-198e40f9b3ea" class="">✨ współpracować online nad jednym plikiem w czasie rzeczywistym.</p><p id="963b80e2-d905-449b-9000-8211656c1445" class="">👉 To ogromna oszczędność czasu i możliwość skupienia się na tym, co najważniejsze – <strong>pracy z uczniami</strong>.</p><hr id="defe909e-f2de-411e-beef-847fc3325281"/><h2 id="6eaa9aee-c89a-44e9-ab64-d3e56739f29e" class="">🎥 MidJourney – zdjęcie, które staje się filmem</h2><p id="9673e194-567b-4d21-8c1c-960d5393d672" class="">Na szkoleniu pokazaliśmy, jak z jednego zdjęcia stworzyć krótki film.</p><p id="bb9eb350-be20-43d7-9efc-9426bec92e37" class="">To świetny sposób, żeby dodać lekcji dynamiki i kreatywności. AI nie musi być skomplikowana – może być po prostu narzędziem, które <strong>sprawia, że lekcja staje się ciekawsza</strong>.</p><hr id="30472a54-4422-4b8c-8183-f4739a0803de"/><h2 id="3ac61780-0efb-4e1c-8cd0-201454677b12" class="">📚 NotebookLM – Twój asystent wiedzy</h2><p id="46b57c33-1b5d-466c-8425-5643f7e33987" class="">NotebookLM to narzędzie, które działa jak inteligentny pomocnik.</p><p id="0cc5e460-956e-423c-84b3-ea365f06570b" class="">Wrzucasz dokument (np. HACCP, przepisy, materiały do olimpiady), a on:</p><ul id="24421f5d-4a9d-4dfb-99e5-1b1329d4761f" class="bulleted-list"><li style="list-style-type:disc">streści najważniejsze treści,</li></ul><ul id="532e78a2-f73e-4359-ac1c-33729dd4a295" class="bulleted-list"><li style="list-style-type:disc">podpowie kluczowe zagadnienia,</li></ul><ul id="a0697a1d-d15c-42a3-bde4-8ffdcf55bef1" class="bulleted-list"><li style="list-style-type:disc">wygeneruje quiz dla uczniów,</li></ul><ul id="524f27e6-8b5a-4ce5-bc36-983814e67ccf" class="bulleted-list"><li style="list-style-type:disc">pomoże przygotować się do zajęć szybciej.</li></ul><p id="d0a402a8-7b3b-4ce3-8f87-c5fdbf1a49da" class="">💡 To <strong>nie zastępuje nauczyciela</strong> – wręcz przeciwnie: pozwala Wam oszczędzić czas i skupić się na tłumaczeniu, interpretacji i pracy z uczniami.</p><hr id="2075ac32-fbbe-417c-b19d-3fbcb0cc6581"/><h2 id="450e7c2d-990d-4993-8b97-38fdab2f556e" class="">⚠️ Halucynacje AI – na co uważać</h2><p id="299be236-66a4-467e-b4ff-8243bed81127" class="">AI bywa błyskotliwa, ale… potrafi też „wymyślać fakty”.</p><p id="06dabc6e-2faf-438b-8647-83cf331285aa" class="">To właśnie tzw. <em>halucynacje</em> – gdy chatbot podaje treści brzmiące wiarygodnie, ale całkowicie nieprawdziwe.</p><p id="53330b2c-aeeb-421d-b3c8-ca4014946b8a" class="">Co warto zapamiętać:</p><p id="e4c2aac8-8a46-495c-a004-7a16b9178e55" class="">🔹 AI <strong>nie myśli jak człowiek</strong> – przewiduje słowa na podstawie danych.</p><p id="06a0823d-9a77-4829-b599-d3538710c6e7" class="">🔹 Uczniowie mogą jej ufać za bardzo – dlatego to Wy pokazujecie, jak weryfikować informacje.</p><p id="9a8208b0-fe9f-41ef-80f4-701781885ff6" class="">🔹 To okazja do nauki krytycznego myślenia – a więc coś, co szkoła zawsze wspierała.</p><p id="78428d65-491d-48a1-a775-8e7cc051539a" class="">👉 Klucz? <strong>Nie bać się AI, tylko ją oswoić</strong>.</p><hr id="8e2c885f-d1b4-4ba0-be4f-190409226a55"/><h2 id="efe05bba-6f34-48e2-b398-9daed1b981c7" class="">💪 W nauczycielach siła</h2><p id="6147b881-4de8-4a96-97b5-34a73063bc0e" class="">To Wy decydujecie, jak wykorzystać sztuczną inteligencję w klasie.</p><p id="4dfe5c1b-7801-4338-adec-d09df98ca825" class="">AI może przyspieszyć pracę i inspirować, ale <strong>nigdy nie zastąpi wiedzy, doświadczenia i autentycznego kontaktu z uczniami</strong>.</p><p id="f146b2cb-0342-4cea-9abd-9c76c00792f4" class="">To w Waszych rękach jest dziś pałeczka.</p><p id="03970789-5ea0-4e2c-9ca8-36702cfdcacb" class="">Dzięki Wam młodzi ludzie uczą się nie tylko korzystać z nowych narzędzi, ale też <strong>odpowiedzialnie z nich korzystać</strong>.</p><hr id="366d59d4-6032-41e5-947b-35f4a350c03b"/><h2 id="e5f05513-3369-48fd-9450-ca626dbd34fc" class="">📝 Dziękujemy za udział w ankiecie</h2><p id="5f5cf654-99c3-475e-a130-1a84fb62388c" class="">Dziękujemy wszystkim z Państwa, którzy wzięli udział w naszej ankiecie dotyczącej produktu cyfrowego dla nauczycieli.</p><p id="ea76445c-6815-4564-b434-1e4d99b8946b" class="">Wasze odpowiedzi pomogą nam tworzyć narzędzia jeszcze lepiej dopasowane do realnych potrzeb w szkole.</p><p id="d5fc333a-3fa5-462f-8571-2d38d8e2cbf2" class="">👉 Jeżeli ktoś z Państwa nie mógł jeszcze wypełnić ankiety – zapraszamy:</p><p id="e1533c61-83d0-451a-8669-5dc7a439d47d" class="">🔗 <a href="https://yourtwinmind.xyz/ankieta.html?utm_source=chatgpt.com">Kliknij tutaj, aby wziąć udział</a></p><hr id="261db654-06ed-808d-a7b6-ccd21bbc6672"/><h2 id="b1636446-414a-4335-87b5-f7ab358abd54" class="">✉️ Bądźmy w kontakcie</h2><p id="d41db567-c819-4308-8b69-0676885fa40f" class="">Stale tworzymy nowe materiały i rozwiązania przydatne w szkole.</p><p id="b055fad0-a122-4107-aa09-9386ecfe4bf3" class="">Masz pytanie? Chcesz coś przetestować? A może masz pomysł na kolejny warsztat?</p><p id="261db654-06ed-804d-8f1f-ddd03598df17" class="">
+</p><p id="9fb2732c-6c01-4955-8107-fcb403eac889" class="">📩 <strong>Napisz do nas!</strong></p><p id="261db654-06ed-806a-a107-ee086959a485" class="">office@yourtwinmind.xyz</p><p id="261db654-06ed-8034-8f62-ef2bc1b22b61" class="">
+</p><p id="326aa252-12d1-44f7-ab1e-46ae9d7409ad" class="">Pozdrawiamy serdecznie,</p><p id="a9494cdb-870b-438c-a474-e5c685b69a2d" class=""><strong>Ania &amp; Artur</strong></p><figure id="263db654-06ed-80ef-a904-d5a4f5fe8a69" class="image"><a href="Sztuczna%20inteligencja%20w%20pracy%20nauczyciela%20i%20ucznia%20261db65406ed80aebc53cd2b573681d6/stopka_bez_logo_(1).png"><img style="width:709.96533203125px" src="Sztuczna%20inteligencja%20w%20pracy%20nauczyciela%20i%20ucznia%20261db65406ed80aebc53cd2b573681d6/stopka_bez_logo_(1).png"/></a></figure></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
