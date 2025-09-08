@@ -2,199 +2,102 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
-  <title>Your Twin Mind – Comet poradnik AI</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="style.css?v=2">
-  <style>
-    body {
-      background: var(--color-background, #202426);
-      margin: 0;
-      color: var(--color-text, #1a2325);
-    }
-    .comet-main-container {
-      max-width: 1160px;
-      margin: 0 auto;
-      padding: 0 16px 48px 16px;
-    }
-    .comet-header {
-      display: flex; flex-direction: column; align-items: center; gap: 14px;
-      padding: 32px 0 12px 0;
-    }
-    .comet-logo {
-      height: 58px;
-      width: auto;
-      border-radius: 10px;
-      box-shadow: 0 2px 16px rgba(50,184,198,.23);
-      background: #fff;
-      padding: 4px 10px;
-    }
-    .comet-brand {
-      font-family: 'Montserrat', sans-serif; font-size: 1.27rem;
-      font-weight: 700; color: var(--color-primary,#21bfc8); letter-spacing: 0.02em;
-      margin-bottom: 3px;
-      text-align: center;
-    }
-
-    .comet-split {
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      gap: 38px;
-      margin-bottom: 48px;
-      flex-wrap: wrap;
-    }
-    .comet-left {
-      flex: 5 1 350px;
-      min-width: 320px;
-      max-width: 540px;
-    }
-    .comet-right {
-      flex: 2 1 245px;
-      min-width: 210px;
-      max-width: 340px;
-    }
-
-    /* Boxy */
-    .comet-feature-box {
-      background: var(--color-bg-3, #195b23d9);
-      padding: 18px 20px 13px 20px;
-      border-radius: 13px;
-      margin: 22px 0 32px 0;
-      font-size: 1.13rem;
-      color: var(--color-text,#fff);
-      font-family: 'Montserrat',sans-serif;
-      line-height: 1.68;
-      box-shadow: 0 1px 6px rgba(19,52,59,.11);
-    }
-    .comet-feature-box ul, .comet-feature-box li {
-      color: #f9fdff !important;
-      font-size: 1.09rem;
-    }
-    .comet-newsletter {
-      background: var(--color-bg-1,#19343a);
-      padding: 30px 24px 22px 24px;
-      border-radius: 17px;
-      box-shadow:0 3px 18px rgba(19,52,59,0.11);
-      max-width: 470px;
-      margin:52px auto 0 auto;
-    }
-    .newsletter-lead {
-      color: #fff !important;
-      font-size: 1.13rem;
-      font-family: 'Montserrat',sans-serif;
-      text-align:center;
-      margin-bottom:19px;
-      opacity:1;
-    }
-    /* Responsywność */
-    @media (max-width:950px){
-      .comet-split {flex-direction:column;align-items:center;}
-      .comet-left, .comet-right {max-width:100%;}
-      .comet-right {margin-top:15px;}
-    }
-    @media (prefers-color-scheme: dark) {
-      body {background: var(--color-background, #191e21);}
-      .comet-feature-box, .comet-feature-box ul, .comet-feature-box li,
-      .newsletter-lead {color: #f8fafd !important;}
-      .comet-newsletter {background: #181f29;}
-    }
-  </style>
+  <title>Comet – poradnik przeglądarki AI | Your Twin Mind</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="comet-main-container">
+  <div class="comet-container" style="max-width: 750px; margin: 0 auto; padding: 32px 10px 0 10px;">
+    <!-- Logo -->
+    <div class="comet-logo-box" style="display:flex;align-items:center;justify-content:center;flex-direction:column;margin-bottom:22px;">
+      <img src="/logo-ytm2.png" alt="Your Twin Mind logo" class="comet-logo" style="height:56px;width:auto;border-radius:13px;background:#fff;box-shadow:0 3px 16px rgba(50,184,198,0.12);margin-bottom:6px;">
+      <span class="comet-brand" style="color:var(--color-primary,#13d3e6);font-weight:bold;font-size:1.12rem;letter-spacing:0.05em;text-align:center;margin-bottom:8px;">Your Twin Mind</span>
+    </div>
 
-    <!-- Główne logo/top -->
-    <header class="comet-header">
-      <img src="/logo-ytm2.png" class="comet-logo" alt="Your Twin Mind logo">
-      <span class="comet-brand">Your Twin Mind</span>
-    </header>
+    <!-- Zdjęcie poradnika -->
+    <img src="/comet/comet_2.png" alt="Comet – Praktyczny Poradnik AI" class="comet-img" style="max-width:420px;width:100%;border-radius:15px;box-shadow:0 10px 28px rgba(0,0,0,0.14);display:block;margin:0 auto 16px auto;">
 
-    <!-- Dwie kolumny: opis + boksy -->
-    <main class="comet-split">
+    <!-- Nagłówek -->
+    <h1 class="hero-title" style="text-align:center;">Comet – Twoja pierwsza przeglądarka z AI</h1>
+    <p class="hero-description" style="text-align:center;">
+      <b>Praktyczny przewodnik</b> – wszystko, co musisz wiedzieć, żeby wycisnąć z Comet maxa!
+    </p>
 
-      <!-- LEWA KOLUMNA -->
-      <section class="comet-left">
-        <img src="comet_2.jpg" alt="Comet – Poradnik AI" style="max-width:410px;width:100%;border-radius:16px;box-shadow:0 12px 32px rgba(0,0,0,0.19);margin-bottom:20px;">
-        <h1 class="hero-title" style="margin-bottom:12px;">Comet – Twoja pierwsza przeglądarka z AI</h1>
-        <p class="hero-description" style="margin-bottom:24px;">
-          <b>Praktyczny przewodnik</b> – wszystko, co musisz wiedzieć, żeby wycisnąć z Comet maxa!
-        </p>
-        <p style="text-align:justify; margin-bottom:22px; color:var(--color-text,#fff); font-size:1.12rem;">
-          Otwierasz się na przyszłość przeglądania? Comet to pierwszy w Polsce praktyczny poradnik do najnowszej przeglądarki AI od Perplexity – napisany prostym językiem,
-          z myślą o osobach, które chcą korzystać z mocy sztucznej inteligencji w codziennych zadaniach, zarówno prywatnie, jak i w pracy.
-        </p>
-        <h2 style="font-size:1.17rem; margin-top:32px; margin-bottom:7px; text-align:left;">Dla kogo jest ten poradnik?</h2>
-        <ul style="font-size:1.02rem; margin-bottom:17px; color:var(--color-text,#fff); line-height:1.65;">
-          <li>Dla każdego, kto nigdy nie miał do czynienia z przeglądarkami AI i chce zacząć bez stresu.</li>
-          <li>Dla użytkowników Chrome, Edge, Firefox, którzy chcą wejść w nową erę internetu.</li>
-          <li>Dla osób ceniących praktyczność: jasne instrukcje, przykłady, ZERO suchych schematów.</li>
-          <li>Zarówno dla początkujących, jak i bardziej zaawansowanych użytkowników!</li>
-        </ul>
-        <h2 style="font-size:1.17rem; margin-top:20px; margin-bottom:7px; text-align:left;">Co znajdziesz w środku?</h2>
-        <ul style="font-size:1.02rem; margin-bottom:16px; color:var(--color-text,#fff); line-height:1.65;">
-          <li>Czym jest Comet i dlaczego warto jej używać? Podstawowe różnice, dla kogo to rozwiązanie.</li>
-          <li>Instalacja krok po kroku (Windows, macOS), import danych, konfiguracja, personalizacja.</li>
-          <li>Jak działa asystent AI i panel Sidecar?</li>
-          <li>Praktyczne przykłady użycia: szybkie streszczenia, wyjaśnienia, wyszukiwanie plików, maili, dokumentów.</li>
-          <li>Komendy i automatyzacja – jak stworzyć własne skróty i przyspieszyć działania.</li>
-          <li>Scenariusze: obsługa maili, kalendarza, rezerwacje, porównania zakupów, nauka, multimedia, zarządzanie zakładkami.</li>
-          <li>Bezpieczeństwo i ochrona prywatności, menedżer haseł, tryb incognito i kluczowe ustawienia.</li>
-          <li>Zaawansowane wskazówki i triki dla pro-userów z przestrzeniami Perplexity.</li>
-          <li>Zero lania wody – tylko konkret!</li>
-        </ul>
+    <!-- Wstęp -->
+    <p class="comet-lead" style="text-align:center;">
+      Otwierasz się na przyszłość przeglądania? Comet to pierwszy w Polsce praktyczny poradnik do najnowszej przeglądarki AI od Perplexity – napisany prostym językiem, z myślą o osobach, które chcą korzystać z mocy sztucznej inteligencji w codziennych zadaniach, zarówno prywatnie, jak i w pracy.
+    </p>
 
-        <!-- Green feature box -->
-        <div class="comet-feature-box">
-          <b>Każdy rozdział przewodnika zawiera:</b>
-          <ul>
-            <li>zrzuty ekranu i proste instrukcje krok po kroku,</li>
-            <li>gotowe do użycia przykłady i polecenia,</li>
-            <li>sekcję „rozwiązywanie problemów”.</li>
-          </ul>
-        </div>
+    <!-- Dla kogo -->
+    <h2 class="comet-section-h2" style="font-size:1.21rem; color:var(--color-primary,#17c6e5);margin-top:30px;margin-bottom:8px;text-align:left;letter-spacing:0.01em;font-weight:590;text-transform:uppercase;">
+      Dla kogo jest ten poradnik?
+    </h2>
+    <ul class="comet-section-list" style="font-size:1.02rem;color:#f6fdff;margin-bottom:17px;margin-top:0;line-height:1.68;">
+      <li>Dla każdego, kto nigdy nie miał do czynienia z przeglądarkami AI i chce zacząć bez stresu.</li>
+      <li>Dla użytkowników Google Chrome, Edge czy Firefox, którzy chcą wejść w nową erę internetu.</li>
+      <li>Dla osób ceniących praktyczność: jasne instrukcje, przykłady, ZERO suchych schematów.</li>
+      <li>Zarówno dla początkujących, jak i bardziej zaawansowanych użytkowników!</li>
+    </ul>
 
-        <!-- Model PWYW + Payhip -->
-        <p style="margin-bottom:2rem; color:var(--color-text,#fff); font-size:1.01rem;">
-          <b>Model „Pay What You Want”:</b> Ten poradnik udostępniamy w formule <u>pay what you want</u> – sam/a decydujesz, ile zapłacisz! Możesz pobrać go bez zobowiązań, sprawdzić jak się sprawdza w praktyce, a dopiero potem – jeśli uznasz, że warto – możesz wrzucić nam dowolną kwotę. To pozwoli tworzyć kolejne praktyczne materiały.
-        </p>
-        <a href="https://payhip.com/YourTwinMind" target="_blank" rel="noopener"
-          style="display:block; background:var(--color-primary,#21808d); color:var(--color-cream-50,#fff); border-radius:14px; font-weight:600; text-align:center;
-          font-size:1.15rem; letter-spacing:0.03em; padding:19px 0; text-decoration:none; margin-bottom:38px; box-shadow:0 2px 16px rgba(50,184,198,0.18); transition:background 0.18s;">
-          Kup poradnik » Pay What You Want
-        </a>
-      </section>
+    <!-- Co znajdziesz -->
+    <h2 class="comet-section-h2" style="font-size:1.21rem; color:var(--color-primary,#17c6e5);margin-top:24px;margin-bottom:8px;text-align:left;letter-spacing:0.01em;font-weight:590;text-transform:uppercase;">
+      Co znajdziesz w środku?
+    </h2>
+    <ul class="comet-section-list" style="font-size:1.02rem;color:#f6fdff;margin-bottom:17px;margin-top:0;line-height:1.68;">
+      <li>Czym jest Comet i dlaczego warto jej używać? Wprowadzenie, podstawowe różnice, dla kogo to rozwiązanie.</li>
+      <li>Instalacja krok po kroku (Windows, macOS), import danych, konfiguracja, personalizacja.</li>
+      <li>Jak działa asystent AI i panel Sidecar?</li>
+      <li>Praktyczne przykłady użycia: szybkie streszczenia, wyjaśnienia, wyszukiwanie własnych plików, maili, dokumentów.</li>
+      <li>Komendy i automatyzacja – jak stworzyć własne skróty i przyspieszyć działania.</li>
+      <li>Scenariusze: obsługa maili, kalendarza, rezerwacje, porównania zakupów, nauka, multimedia, zarządzanie zakładkami.</li>
+      <li>Bezpieczeństwo i ochrona prywatności – menedżer haseł, cookies, tryb incognito, kluczowe ustawienia.</li>
+      <li>Zaawansowane wskazówki i triki dla pro-userów z przestrzeniami Perplexity.</li>
+      <li>Zero lania wody – tylko konkret!</li>
+    </ul>
 
-      <!-- PRAWA KOLUMNA (tip box, cytat, info, kontakt)-->
-      <aside class="comet-right">
-        <div style="background:var(--color-bg-2,#26343E);color:#fff;border-radius:13px;padding:26px 17px 22px 22px;box-shadow:0 2px 11px rgba(60,160,200,0.09);font-size:1.13rem;">
-          <b style="color:var(--color-primary,#26b6c9); font-size:1.07rem;letter-spacing:0.01em;">Wskazówka:</b><br>
-          <ul style="margin:10px 0 0 18px;">
-            <li>
-              Sprawdź rozdział <b>„Triki dla pro-userów”</b><br>
-              Odkryj sekrety Comet i wyciśnij z AI maksimum w codziennej pracy!
-            </li>
-            <li>
-              Masz pytania dotyczące AI w praktyce?<br>
-              Napisz do nas: <a style="color:var(--color-primary)" href="mailto:kontakt@yourtwinmind.xyz">kontakt@yourtwinmind.xyz</a>
-            </li>
-            <li>
-              Zapraszamy na <a href="https://payhip.com/YourTwinMind" style="color:var(--color-primary);font-weight:600;">Payhip</a> – odkryj nasze pozostałe produkty!
-            </li>
-          </ul>
-        </div>
-      </aside>
-    </main>
+    <!-- Wyróżnik -->
+    <div class="comet-feature-box" style="background:var(--color-bg-3,#e6f4ea); padding:18px; border-radius:12px; margin:22px 0 30px 0; font-size:1.09rem; color:var(--color-slate-900); line-height:1.7; font-weight: 500; box-shadow:0 1px 7px rgba(19,52,59,0.11);">
+      Każdy rozdział przewodnika zawiera:
+      <ul style="margin:11px 0 0 22px; color: var(--color-slate-900);">
+        <li>zrzuty ekranu i proste instrukcje krok po kroku,</li>
+        <li>gotowe do użycia przykłady i polecenia,</li>
+        <li>sekcję „rozwiązywanie problemów”.</li>
+      </ul>
+    </div>
+
+    <!-- Model pay what you want -->
+    <p class="paywhat-lead" style="margin-bottom:2.3em; color:#fff; font-size:1.01rem; text-align:center; background:var(--color-primary,#189bb1);border-radius:10px;padding:12px;">
+      <b>Model „Pay What You Want”:</b> Ten poradnik udostępniamy w formule <u>pay what you want</u> – sam/a decydujesz, ile zapłacisz! Możesz pobrać go bez zobowiązań, sprawdzić jak się sprawdza w praktyce, a dopiero potem – jeśli uznasz, że warto – możesz wrzucić nam dowolną kwotę. To pozwoli tworzyć kolejne praktyczne materiały.
+    </p>
+
+    <!-- Przycisk do Payhip -->
+    <a href="https://payhip.com/YourTwinMind" target="_blank" rel="noopener"
+      class="comet-payhip"
+      style="display:block;background:var(--color-primary,#21808d);color:var(--color-cream-50,#fff);border-radius:14px;font-weight:600;text-align:center;font-size:1.15rem;letter-spacing:0.03em;padding:19px 0;text-decoration:none;margin-bottom:38px;box-shadow:0 2px 16px rgba(50,184,198,0.18);transition:background 0.18s;">
+      Kup poradnik » Pay What You Want
+    </a>
 
     <!-- Newsletter -->
-    <section class="comet-newsletter">
-      <h2 style="font-size:1.15rem; text-align:center; margin-bottom:9px; letter-spacing:0.01em; color:#fff;">Dołącz do newslettera Comet!</h2>
-      <p class="newsletter-lead">
-        Bądź pierwszą osobą, która dowie się o nowych materiałach, aktualizacjach i specjalnych ofertach.<br>
-        <span style="font-size:0.99em; color:var(--color-primary)">Zapisz się już teraz – to nic nie kosztuje!</span>
-      </p>
-      
-      <form action="#" method="post" style="display:flex; flex-direction:column; align-items:center; gap:10px;max-width:380px;margin:auto;" autocomplete="off">
+    <section class="comet-newsletter" style="margin:48px auto 8px auto; padding:32px 24px 28px 24px; background:var(--color-bg-1,#1b2e3e); border-radius:17px; box-shadow:0 3px 18px rgba(19,52,59,0.11); max-width:470px;">
+      <h2 style="font-size:1.14rem;text-align:center;margin-bottom:13px;letter-spacing:0.01em;color:#fff;">Dołącz do newslettera Comet!</h2>
+      <div class="newsletter-lead" style="color:#fff !important;font-size:1.12rem;text-align:center;margin-bottom:14px;">
+        Bądź pierwszą osobą, która dowie się o nowych materiałach, aktualizacjach i specjalnych ofertach.
+        <span style="font-size:0.96em; color:var(--color-primary)">Zapisz się już teraz – to nic nie kosztuje!</span>
+      </div>
+      <form action="#" method="post" style="display:flex; flex-direction:column; align-items:center; gap:12px;" autocomplete="off">
         <input type="email" name="email" class="form-control email-input"
-          style="max-width:350px; width:100%; border-radius:9px; font-size:1.1rem; padding:13px 16px; margin-bottom:2px;" 
-          placeholder="Twój email" required disabled>
-        <button type="submit" class
+          placeholder="Twój email" required disabled
+          style="max-width:350px;width:100%;border-radius:9px;font-size:1.06rem;padding:13px 16px;margin-bottom:2px;border:1px solid #15c8d7;background:#171f26;color:#f8fafd;">
+        <button type="submit" class="btn btn--primary btn--full-width submit-btn" disabled
+          style="background:var(--color-primary,#21808d);color:var(--color-cream-50,#fff);font-size:1.12rem;border-radius:9px;padding:12px 18px 12px 18px;width:100%;font-weight:600;margin-top:6px;">
+          Zapisz się (wkrótce aktywne!)
+        </button>
+      </form>
+      <div class="newsletter-note" style="margin:10px 0 0 0; color:#ddeafd; font-size:0.98em; text-align:center; opacity:0.85;">
+        Spokojnie, żadnego spamu i zawsze możesz się wypisać.
+      </div>
+    </section>
+    <div style="height:42px;"></div>
+  </div>
+</body>
+</html>
