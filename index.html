@@ -3,129 +3,233 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Twin Mind - Lista oczekujących</title>
-    
-    <!-- Import HORIZON font with Polish support -->
-    <link rel="preconnect" href="https://fonts.cdnfonts.com">
-
-    <!-- Import Montserrat from Google Fonts with Polish support -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&subset=latin,latin-ext&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-
+    <title>Your Twin Mind - Twoje cyfrowe rozwiązania AI na wyciągnięcie ręki</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <main class="main-container">
-        <!-- Hero Section -->
-        <section class="hero-section">
-            <div class="container">
-                <div class="container">
-                    <!-- Logo tylko jako PNG, bez tekstu -->
-                    <div class="logo-container" style="display:flex;align-items:center;justify-content:center;margin-bottom:22px;">
-                      <img
-                        src="logo-ytm2.png"   
-                        alt="Your Twin Mind logo"
-                        class="logo-svg"
-                        style="height:156px;width:auto;border-radius:13px;margin-bottom:6px;">
-                    </div>
-
-                <div class="hero-content">
-                    <h1 class="hero-title">Lista oczekujących</h1>
-                    <p class="hero-subtitle">Bądź pierwszą osobą, która dowie się o naszych nowych produktach AI</p>
-                    <p class="hero-description">Zapisz się na naszą listę oczekujących i otrzymaj powiadomienie o premierze naszych produktów cyfrowych oraz ekskluzywne oferty dla early adopters.</p>
-                    
-                    <!-- Test polskich znaków -->
-                    <!-- <p class="polish-test">Testowanie polskich znaków: ąćęłńóśźż ĄĆĘŁŃÓŚŹŻ</p> -->
-                </div>
-
-                <!-- Waitlist Form -->
-                <form class="waitlist-form" id="waitlistForm">
-                    <div class="form-group">
-                        <label for="email" class="form-label">Adres e-mail</label>
-                        <input 
-                            type="email" 
-                            id="email" 
-                            name="email" 
-                            class="form-control email-input" 
-                            placeholder="Twój adres e-mail" 
-                            required 
-                            aria-describedby="email-error"
-                            accept-charset="UTF-8"
-                            spellcheck="false"
-                            autocomplete="email"
-                        >
-                        <span class="error-message" id="email-error"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="checkbox-container">
-                            <input 
-                                type="checkbox" 
-                                id="consent" 
-                                name="consent" 
-                                class="checkbox-input" 
-                                required
-                                aria-describedby="consent-error"
-                            >
-                            <label for="consent" class="checkbox-label">
-                                Wyrażam zgodę na przetwarzanie mojego adresu e-mail w celu powiadomienia o dostępności produktów cyfrowych oraz przesyłania informacji marketingowych zgodnie z
-                                <span class="privacy-link" role="button" tabindex="0" id="privacyPolicyBtn">polityką prywatności</span>.
-                            </label>
-                        </div>
-                        <span class="error-message" id="consent-error"></span>
-                    </div>
-
-                    <button type="submit" class="btn btn--primary btn--full-width submit-btn" id="submitBtn">
-                        <span class="btn-text">Dołącz do waitlisty</span>
-                        <span class="loading-spinner hidden" id="loadingSpinner"></span>
-                    </button>
-                </form>
-
-                <!-- Status Messages -->
-                <div class="status-messages">
-                    <div class="status-message success-message hidden" id="successMessage" >
-                        <div class="status-icon">✓</div>
-                        <p>Dziękujemy! Zostałeś/aś dodany/a do listy oczekujących.</p>
-<!--                         <p>Artur... masakra :-)</p> -->
-                    </div>
-                    <div class="status-message error-message hidden" id="errorMessage" >
-                        <div class="status-icon">⚠</div>
-                        <p>Wystąpił błąd. Spróbuj ponownie.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Privacy Policy Modal -->
-    <div class="modal hidden" id="privacyModal">
-        <div class="modal-backdrop" id="modalBackdrop"></div>
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">Polityka Prywatności - Lista Oczekujących</h2>
-                <button type="button" class="modal-close" id="closeModal" aria-label="Zamknij">
-                    <span>&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="privacy-content">
-                    <p>1. Administratorem danych osobowych jest Your Twin Mind.</p>
-                    <p>2. Twój adres e-mail będzie przetwarzany w celu powiadomienia Cię o dostępności naszych produktów cyfrowych AI.</p>
-                    <p>3. Podstawą prawną przetwarzania jest Twoja dobrowolna zgoda (art. 6 ust. 1 lit. a RODO).</p>
-                    <p>4. Dane będą przechowywane do czasu cofnięcia zgody lub realizacji celu.</p>
-                    <p>5. Masz prawo do wycofania zgody, dostępu do danych, ich sprostowania, usunięcia oraz przenoszenia.</p>
-                    <p>6. Możesz wycofać zgodę wysyłając e-mail na: office@yourtwinmind.xyz.</p>
-                    <p>7. Dane nie będą przekazywane do krajów trzecich.</p>
-                    <p>8. W przypadku pytań lub skarg możesz skontaktować się z nami lub z UODO.</p>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn--secondary" id="closeModalBtn">Zamknij</button>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header__content">
+                <!-- Logo tylko jako PNG, bez tekstu -->
+                <div class="logo-container" style="display:flex;align-items:center;justify-content:center;margin-bottom:22px;">
+                    <img
+                      src="logo-ytm2.png"   
+                      alt="Your Twin Mind logo"
+                      class="logo-svg"
+                      style="height:156px;width:auto;border-radius:13px;margin-bottom:6px;">
+                  </div>
+                <nav class="navigation">
+                    <button type="button" class="nav-btn active" data-tab="home">Strona Główna</button>
+                    <button type="button" class="nav-btn" data-tab="products">Produkty</button>
+                    <button type="button" class="nav-btn" data-tab="about">O Nas</button>
+                </nav>
             </div>
         </div>
-    </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        
+        <!-- Home Tab -->
+        <div id="home-tab" class="tab-content active">
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="container">
+                    <div class="hero__content">
+                        <h1 class="hero__title">Twoje cyfrowe rozwiązania AI na wyciągnięcie ręki</h1>
+                        <p class="hero__description">Specjalizujemy się w tworzeniu praktycznych przewodników i produktów cyfrowych, które pomagają wykorzystać moc sztucznej inteligencji w codziennych zadaniach - zarówno prywatnie, jak i w pracy.</p>
+                        <button type="button" class="btn btn--primary btn--lg" id="hero-cta">Dołącz do waitlisty</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Waitlist Section -->
+            <section class="waitlist" id="waitlist-section">
+                <div class="container">
+                    <div class="waitlist__content">
+                        <h2>Dołącz do waitlisty</h2>
+                        <p>Bądź pierwszą osobą, która dowie się o naszych najnowszych produktach AI.</p>
+                        
+                        <form class="waitlist-form" id="waitlist-form" novalidate>
+                            <div class="form-group">
+                                <label class="form-label" for="waitlist-name">Imię*</label>
+                                <input type="text" id="waitlist-name" name="waitlist-name" class="form-control" required autocomplete="given-name">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="waitlist-email">Adres e-mail*</label>
+                                <input type="email" id="waitlist-email" name="waitlist-email" class="form-control" required autocomplete="email">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="waitlist-product">Interesujący produkt</label>
+                                <select id="waitlist-product" name="waitlist-product" class="form-control">
+                                    <option value="">Wybierz produkt</option>
+                                    <option value="COMET - Przewodnik po przeglądarce AI">COMET - Przewodnik po przeglądarce AI</option>
+                                    <option value="Wszystkie nadchodzące produkty">Wszystkie nadchodzące produkty</option>
+                                    <option value="Kursy i webinary AI">Kursy i webinary AI</option>
+                                    <option value="Newsletter z tips & tricks">Newsletter z tips & tricks</option>
+                                </select>
+                            </div>
+                            
+                            <button type="submit" class="btn btn--primary btn--full-width">Dołącz do waitlisty</button>
+                        </form>
+                        
+                        <div class="success-message hidden" id="waitlist-success">
+                            <div class="status status--success">✓ Dziękujemy! Zostałeś dodany do waitlisty.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Products Tab -->
+        <div id="products-tab" class="tab-content">
+            <div class="container">
+                <div class="products-header">
+                    <h1>Nasze Produkty</h1>
+                    <p>Odkryj nasze praktyczne przewodniki i produkty cyfrowe, które pomogą Ci wykorzystać moc sztucznej inteligencji w codziennych zadaniach.</p>
+                </div>
+                
+                <div class="products-grid">
+                    <!-- COMET Product -->
+                    <div class="product-card product-card--featured">
+                        <div class="product-card__header">
+                            <h3>Praktyczny przewodnik COMET</h3>
+                            <div class="product-price">Pay What You Want</div>
+                        </div>
+                        <div class="product-card__body">
+                            <p>Wszystko, co musisz wiedzieć, żeby wycisnąć z Comet maxa! Pierwszy w Polsce praktyczny poradnik do najnowszej przeglądarki AI od Perplexity – napisany prostym językiem, z myślą o osobach, które chcą korzystać z mocy sztucznej inteligencji w codziennych zadaniach.</p>
+                            <div class="product-features">
+                                <ul>
+                                    <li>Odkryjesz, jak działa asystent AI w przeglądarce</li>
+                                    <li>Zyskasz szybki start: instalacja, personalizacja, import danych</li>
+                                    <li>Skorzystasz z porad krok po kroku</li>
+                                    <li>Dowiesz się, jak połączyć Comet z 'przestrzeniami' w Perplexity</li>
+                                </ul>
+                            </div>
+                            <span class="product-category">Przewodnik AI</span>
+                            <div class="product-status status--success">Dostępny teraz</div>
+                        </div>
+                        <div class="product-card__footer">
+                            <a href="https://payhip.com/b/MbAR4" target="_blank" rel="noopener noreferrer" class="btn btn--primary btn--full-width">
+                                Dowiedz się więcej
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 2 -->
+                    <div class="product-card">
+                        <div class="product-card__header">
+                            <h3>Kolejny produkt AI</h3>
+                            <div class="product-price">Do ustalenia</div>
+                        </div>
+                        <div class="product-card__body">
+                            <p>Szczegóły wkrótce...</p>
+                            <span class="product-category">W przygotowaniu</span>
+                            <div class="product-status status--info">W przygotowaniu</div>
+                        </div>
+                        <div class="product-card__footer">
+                            <button type="button" class="btn btn--outline btn--full-width notify-btn" data-product="Kolejny produkt AI">
+                                Powiadom mnie
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 3 -->
+                    <div class="product-card">
+                        <div class="product-card__header">
+                            <h3>Trzeci produkt AI</h3>
+                            <div class="product-price">Do ustalenia</div>
+                        </div>
+                        <div class="product-card__body">
+                            <p>Szczegóły wkrótce...</p>
+                            <span class="product-category">W przygotowaniu</span>
+                            <div class="product-status status--info">W przygotowaniu</div>
+                        </div>
+                        <div class="product-card__footer">
+                            <button type="button" class="btn btn--outline btn--full-width notify-btn" data-product="Trzeci produkt AI">
+                                Powiadom mnie
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="notification-message hidden" id="product-notification">
+                    <div class="status status--success">✓ Otrzymasz powiadomienie gdy produkt będzie dostępny!</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Tab -->
+        <div id="about-tab" class="tab-content">
+            <div class="container">
+                <div class="about-header">
+                    <h1>O Nas</h1>
+                    <p>Poznaj naszą misję tworzenia praktycznych rozwiązań AI dla każdego.</p>
+                </div>
+                
+                <div class="about-content">
+                    <div class="company-info">
+                        <h2>Nasza Misja</h2>
+                        <p>W Your Twin Mind wierzymy, że sztuczna inteligencja powinna być dostępna i zrozumiała dla każdego. Tworzymy praktyczne przewodniki i produkty cyfrowe, które pomagają wykorzystać moc AI w codziennych zadaniach - zarówno prywatnie, jak i w pracy.</p>
+                        
+                        <h2>Nasza Wizja</h2>
+                        <p>Chcemy być mostkiem między skomplikowanymi technologiami AI a praktycznymi potrzebami użytkowników. Dążymy do świata, gdzie każdy może z łatwością korzystać z najnowszych narzędzi AI, aby osiągać swoje cele efektywniej i kreatywniej.</p>
+                        
+                        <h2>Dlaczego Your Twin Mind?</h2>
+                        <p>AI może być Twoim cyfrowym bliźniakiem - pomocnikiem, który rozumie Twoje potrzeby i wspiera Cię w realizacji zadań. Nasze produkty pokazują, jak przekształcić tę wizję w rzeczywistość poprzez praktyczne, sprawdzone rozwiązania.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer with Contact Form -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <h2>Skontaktuj się z nami</h2>
+                <p>Masz pytania? Napisz do nas - odpowiemy najszybciej jak to możliwe.</p>
+                
+                <form class="contact-form" id="contact-form" novalidate>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="contact-name">Imię i nazwisko*</label>
+                            <input type="text" id="contact-name" name="contact-name" class="form-control" required autocomplete="name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="contact-email">Adres e-mail*</label>
+                            <input type="email" id="contact-email" name="contact-email" class="form-control" required autocomplete="email">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="contact-subject">Temat*</label>
+                        <input type="text" id="contact-subject" name="contact-subject" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="contact-message">Wiadomość*</label>
+                        <textarea id="contact-message" name="contact-message" class="form-control" rows="5" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn--primary">Wyślij wiadomość</button>
+                </form>
+                
+                <div class="success-message hidden" id="contact-success">
+                    <div class="status status--success">✓ Dziękujemy za wiadomość! Odpowiemy wkrótce.</div>
+                </div>
+            </div>
+            
+            <div class="footer__bottom">
+                <p>&copy; 2025 Your Twin Mind. Wszystkie prawa zastrzeżone.</p>
+            </div>
+        </div>
+    </footer>
 
     <script src="app.js"></script>
 </body>
