@@ -196,16 +196,16 @@ function go(tab) {
     };
     window.location.href = map[tab] || '/index.html';
   }
-  document.addEventListener('DOMContentLoaded', () => {
-    const path = location.pathname.toLowerCase(); // np. /products.html
-    document.querySelectorAll('.navigation .nav-link').forEach(a => {
-      const href = (a.getAttribute('href') || '').toLowerCase();
-      // dopasuj /, /index.html, /products.html, /about.html
-      const isHome = (path === '/' || path.endsWith('/index.html')) && href.endsWith('/index.html');
-      const isSame = path.endsWith(href.replace(/^\//,''));
-      a.classList.toggle('active', isHome || isSame);
-    });
-  });
+//   document.addEventListener('DOMContentLoaded', () => {
+//     const path = location.pathname.toLowerCase(); // np. /products.html
+//     document.querySelectorAll('.navigation .nav-link').forEach(a => {
+//       const href = (a.getAttribute('href') || '').toLowerCase();
+//       // dopasuj /, /index.html, /products.html, /about.html
+//       const isHome = (path === '/' || path.endsWith('/index.html')) && href.endsWith('/index.html');
+//       const isSame = path.endsWith(href.replace(/^\//,''));
+//       a.classList.toggle('active', isHome || isSame);
+//     });
+//   });
 function initializeHeroCta() {
     const heroCta = document.getElementById('hero-cta');
     console.log('Hero CTA element:', heroCta); // DEBUG
