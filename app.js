@@ -95,15 +95,15 @@ function initializeCometLink() {
 
 // Navigation functionality
 function initializeNavigation() {
-    const navButtons = document.querySelectorAll('.nav-btn');
-    navButtons.forEach(btn => {
-      btn.onclick = null;
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const tabName = btn.getAttribute('data-tab');
-        go(tabName);
-      });
-    });
+    // const navButtons = document.querySelectorAll('.nav-btn');
+    // navButtons.forEach(btn => {
+    //   btn.onclick = null;
+    //   btn.addEventListener('click', (e) => {
+    //     e.preventDefault();
+    //     const tabName = btn.getAttribute('data-tab');
+    //     go(tabName);
+    //   });
+    // });
   }
   
   // obsługa przycisku „wstecz”
@@ -188,11 +188,24 @@ function pathToTab(pathname) {
 //   if (!location.hash) location.hash = '#/home';
 //   setActiveTab(tabFromHash());
 // Hero CTA functionality
-function go(tab, replace=false) {
-    setActiveTab(tab);
-    const url = tab === 'home' ? '/' : '/' + tab;
-    history[replace ? 'replaceState' : 'pushState']({ tab }, '', url);
+function go(tab) {
+    const map = {
+      home: '/index.html',
+      products: '/products.html',
+      about: '/about.html',
+    };
+    window.location.href = map[tab] || '/index.html';
   }
+  document.addEventListener('DOMContentLoaded', () => {
+    const path = location.pathname.toLowerCase(); // np. /products.html
+    document.querySelectorAll('.navigation .nav-link').forEach(a => {
+      const href = (a.getAttribute('href') || '').toLowerCase();
+      // dopasuj /, /index.html, /products.html, /about.html
+      const isHome = (path === '/' || path.endsWith('/index.html')) && href.endsWith('/index.html');
+      const isSame = path.endsWith(href.replace(/^\//,''));
+      a.classList.toggle('active', isHome || isSame);
+    });
+  });
 function initializeHeroCta() {
     const heroCta = document.getElementById('hero-cta');
     console.log('Hero CTA element:', heroCta); // DEBUG
