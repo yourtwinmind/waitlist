@@ -107,18 +107,18 @@ function initializeNavigation() {
   }
   
   // obsługa przycisku „wstecz”
-  window.addEventListener('popstate', (e) => {
-    const tab = e.state?.tab || pathToTab(location.pathname);
-    setActiveTab(tab);
-  });
+//   window.addEventListener('popstate', (e) => {
+//     const tab = e.state?.tab || pathToTab(location.pathname);
+//     setActiveTab(tab);
+//   });
   
   // inicjalizacja – ustaw widok zgodny z aktualną ścieżką
-  document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => {
-      const initialTab = pathToTab(location.pathname);
-      go(initialTab, true);
-    }, 100);
-  });
+//   document.addEventListener('DOMContentLoaded', () => {
+//     setTimeout(() => {
+//       const initialTab = pathToTab(location.pathname);
+//       go(initialTab, true);
+//     }, 100);
+//   });
 
 function setActiveTab(tabName) {
     console.log('Setting active tab to:', tabName);
