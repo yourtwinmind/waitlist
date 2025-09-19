@@ -96,36 +96,29 @@ function initializeCometLink() {
 // Navigation functionality
 function initializeNavigation() {
     const navButtons = document.querySelectorAll('.nav-btn');
-    console.log('Initializing navigation buttons:', navButtons.length);
-    
-    navButtons.forEach((button, index) => {
-        console.log(`Setting up nav button ${index}:`, button.getAttribute('data-tab'));
-        
-        // Remove any existing event listeners
-        button.onclick = null;
-        
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            const tabName = this.getAttribute('data-tab');
-            console.log('Navigation clicked:', tabName);
-            
-            if (tabName === 'home') location.hash = '#/home';
-            else location.hash = `#/${tabName}`;        });
-        
-        // Also add direct onclick as backup
-        button.onclick = function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            const tabName = this.getAttribute('data-tab');
-            console.log('Navigation onclick:', tabName);
-            
-            setActiveTab(tabName);
-        };
+    navButtons.forEach(btn => {
+      btn.onclick = null;
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const tabName = btn.getAttribute('data-tab');
+        go(tabName);
+      });
     });
-}
+  }
+  
+  // obsługa przycisku „wstecz”
+  window.addEventListener('popstate', (e) => {
+    const tab = e.state?.tab || pathToTab(location.pathname);
+    setActiveTab(tab);
+  });
+  
+  // inicjalizacja – ustaw widok zgodny z aktualną ścieżką
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+      const initialTab = pathToTab(location.pathname);
+      go(initialTab, true);
+    }, 100);
+  });
 
 function setActiveTab(tabName) {
     console.log('Setting active tab to:', tabName);
@@ -176,22 +169,30 @@ function setActiveTab(tabName) {
         console.error('Tab not found:', `${tabName}-tab`);
     }
 }
-
-// --- HASH ROUTING ---
-function tabFromHash() {
-    const m = location.hash.match(/^#\/?([^/]+)/);
-    const t = (m && m[1]) || 'home';
-    return ['home','products','about'].includes(t) ? t : 'home';
+function pathToTab(pathname) {
+    const seg = pathname.replace(/\/+$/, '').split('/')[1] || 'home';
+    return ['home','products','about'].includes(seg) ? seg : 'home';
   }
+// --- HASH ROUTING ---
+// function tabFromHash() {
+//     const m = location.hash.match(/^#\/?([^/]+)/);
+//     const t = (m && m[1]) || 'home';
+//     return ['home','products','about'].includes(t) ? t : 'home';
+//   }
   
-  window.addEventListener('hashchange', () => {
-    setActiveTab(tabFromHash());
-  });
+//   window.addEventListener('hashchange', () => {
+//     setActiveTab(tabFromHash());
+//   });
   
-  // Przy starcie – ustaw hash i aktywną zakładkę
-  if (!location.hash) location.hash = '#/home';
-  setActiveTab(tabFromHash());
+//   // Przy starcie – ustaw hash i aktywną zakładkę
+//   if (!location.hash) location.hash = '#/home';
+//   setActiveTab(tabFromHash());
 // Hero CTA functionality
+function go(tab, replace=false) {
+    setActiveTab(tab);
+    const url = tab === 'home' ? '/' : '/' + tab;
+    history[replace ? 'replaceState' : 'pushState']({ tab }, '', url);
+  }
 function initializeHeroCta() {
     const heroCta = document.getElementById('hero-cta');
     console.log('Hero CTA element:', heroCta); // DEBUG
