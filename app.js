@@ -111,8 +111,8 @@ function initializeNavigation() {
             const tabName = this.getAttribute('data-tab');
             console.log('Navigation clicked:', tabName);
             
-            setActiveTab(tabName);
-        });
+            if (tabName === 'home') location.hash = '#/home';
+            else location.hash = `#/${tabName}`;        });
         
         // Also add direct onclick as backup
         button.onclick = function(e) {
@@ -177,6 +177,20 @@ function setActiveTab(tabName) {
     }
 }
 
+// --- HASH ROUTING ---
+function tabFromHash() {
+    const m = location.hash.match(/^#\/?([^/]+)/);
+    const t = (m && m[1]) || 'home';
+    return ['home','products','about'].includes(t) ? t : 'home';
+  }
+  
+  window.addEventListener('hashchange', () => {
+    setActiveTab(tabFromHash());
+  });
+  
+  // Przy starcie – ustaw hash i aktywną zakładkę
+  if (!location.hash) location.hash = '#/home';
+  setActiveTab(tabFromHash());
 // Hero CTA functionality
 function initializeHeroCta() {
     const heroCta = document.getElementById('hero-cta');
