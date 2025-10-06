@@ -1329,4 +1329,82 @@ a {
     grid-template-columns: 1fr;
     gap: var(--space-16);
   }
+  .product-image.small {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.product-image.small img {
+  width: 100px;       /* rozmiar miniaturki */
+  height: auto;
+  border-radius: 8px;
+  opacity: 0.95;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.product-image.small img:hover {
+  transform: scale(1.05);
+  opacity: 1;
+}
+
+.product-badge {
+  position: absolute;
+  bottom: -10px;
+  background: #29c436;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.7rem;
+  padding: 3px 8px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+}
+/* Miniaturka produktu – działa na wszystkich szerokościach */
+.product-card__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.product-image.small {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.product-image.small img {
+  display: block;
+  width: 120px;       /* mała miniatura na desktopie */
+  max-height: 160px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  opacity: 0.95;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-badge {
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #29c436;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.75rem;
+  padding: 3px 8px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
 }
