@@ -1,0 +1,32 @@
+{
+  "name": "kreatorka-zmian-landing",
+  "version": "1.0.0",
+  "description": "Landing page dla warsztatów Kreatorka Zmian - AI w Twoich rękach",
+  "main": "index.html",
+  "scripts": {
+    "start": "live-server --port=3000 --open=/index.html",
+    "build": "echo 'Build process would go here'",
+    "deploy": "echo 'Deployment script would go here'"
+  },
+  "keywords": [
+    "landing-page",
+    "warsztaty",
+    "AI",
+    "kobiety",
+    "kariera",
+    "szczecin"
+  ],
+  "author": "Kreatorka Zmian",
+  "license": "Private",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kreatorka-zmian/landing-page.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kreatorka-zmian/landing-page/issues"
+  },
+  "homepage": "https://kreatorkazmian.pl"
+}
