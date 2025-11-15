@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>AI dla Nauczycieli</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <style>
+        /* --- (Twój styl bez zmian) --- */
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;padding:20px;line-height:1.6}
+        .container{max-width:600px;margin:0 auto;background:#fff;border-radius:20px;box-shadow:0 20px 40px rgba(0,0,0,.1);overflow:hidden}
+        .header{background:linear-gradient(135deg,#2c3e50,#34495e);color:#fff;padding:30px 25px;text-align:center}
+        .header h1{font-size:24px;margin-bottom:10px;font-weight:700}
+        .header p{font-size:16px;opacity:.9;line-height:1.5}
+        .form-container{padding:30px 25px}
+        .question{margin-bottom:35px;opacity:0;transform:translateY(20px);animation:fadeInUp .6s ease forwards}
+        .question:nth-child(1){animation-delay:.1s}.question:nth-child(2){animation-delay:.2s}.question:nth-child(3){animation-delay:.3s}.question:nth-child(4){animation-delay:.4s}.question:nth-child(5){animation-delay:.5s}
+        @keyframes fadeInUp{to{opacity:1;transform:translateY(0)}}
+        .question-title{font-size:18px;font-weight:600;color:#2c3e50;margin-bottom:15px;display:flex;align-items:center}
+        .question-number{background:#3498db;color:#fff;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:bold;margin-right:15px;flex-shrink:0}
+        .radio-group,.checkbox-group{display:flex;flex-direction:column;gap:12px}
+        .radio-option,.checkbox-option{display:flex;align-items:center;padding:15px;background:#f8f9fa;border-radius:12px;cursor:pointer;transition:.3s;border:2px solid transparent}
+        .radio-option:hover,.checkbox-option:hover{background:#e3f2fd;border-color:#2196f3;transform:translateX(5px)}
+        .radio-option.selected,.checkbox-option.selected{background:#e8f5e8;border-color:#4caf50}
+        .radio-option input,.checkbox-option input{margin-right:12px;transform:scale(1.2)}
+        .textarea-field,.text-field{width:100%;padding:15px;border:2px solid #e0e0e0;border-radius:12px;font-size:16px;font-family:inherit;resize:vertical;min-height:100px;transition:border-color .3s ease}
+        .text-field{min-height:50px}
+        .textarea-field:focus,.text-field:focus{outline:none;border-color:#3498db;box-shadow:0 0 0 3px rgba(52,152,219,.1)}
+        .submit-section{text-align:center;padding:30px 25px;background:#f8f9fa;border-top:1px solid #e0e0e0}
+        .submit-btn{background:linear-gradient(135deg,#4caf50,#45a049);color:#fff;border:none;padding:18px 40px;font-size:18px;font-weight:600;border-radius:50px;cursor:pointer;transition:.3s;box-shadow:0 4px 15px rgba(76,175,80,.3)}
+        .submit-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(76,175,80,.4)}
+        .submit-btn:disabled{background:#ccc;cursor:not-allowed;transform:none;box-shadow:none}
+        .export-btn{background:linear-gradient(135deg,#2196f3,#1976d2);color:#fff;border:none;padding:12px 25px;font-size:16px;font-weight:600;border-radius:25px;cursor:pointer;margin-left:15px;transition:.3s;box-shadow:0 4px 15px rgba(33,150,243,.3)}
+        .export-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(33,150,243,.4)}
+        .success-message{background:#d4edda;color:#155724;padding:20px;border-radius:12px;margin-top:20px;text-align:center;font-weight:600;display:none}
+        .progress-bar{width:100%;height:6px;background:#e0e0e0;border-radius:3px;overflow:hidden;margin-bottom:20px}
+        .progress-fill{height:100%;background:linear-gradient(90deg,#4caf50,#45a049);width:0%;transition:width .3s ease}
+        .admin-panel{margin-top:30px;padding:20px;background:#f0f8ff;border:2px solid #4169e1;border-radius:10px;display:none}
+        .admin-panel h3{color:#4169e1;margin-bottom:15px}
+        .admin-panel p{margin-bottom:15px;font-weight:600}
+        .delete-btn{background:linear-gradient(135deg,#dc3545,#c82333);margin-left:10px}
+        @media (max-width:480px){
+            body{padding:10px}
+            .header{padding:20px 15px}
+            .header h1{font-size:20px}
+            .form-container{padding:20px 15px}
+            .question-title{font-size:16px}
+            .submit-section{padding:20px 15px}
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>📚 AI dla Nauczycieli</h1>
+        <p>Pomóż nam stworzyć ebook dopasowany do Twoich potrzeb! Twoje odpowiedzi są bardzo ważne dla nas.</p>
+    </div>
+
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+    <form id="surveyForm" class="form-container">
+        <!-- Pytanie 1 -->
+        <div class="question">
+            <div class="question-title"><span class="question-number">1</span>Co najbardziej interesuje Cię w tematyce sztucznej inteligencji w edukacji?</div>
+            <div class="radio-group">
+                <label class="radio-option"><input type="radio" name="q1" value="Praktyczne zastosowania w pracy nauczyciela">Praktyczne zastosowania w pracy nauczyciela</label>
+                <label class="radio-option"><input type="radio" name="q1" value="Wykorzystanie AI przez uczniów">Wykorzystanie AI przez uczniów</label>
+                <label class="radio-option"><input type="radio" name="q1" value="Podstawy działania AI">Podstawy działania AI</label>
+                <label class="radio-option"><input type="radio" name="q1" value="Aspekty etyczne i prawne">Aspekty etyczne i prawne</label>
+            </div>
+
+            <input type="text" name="q1_other" class="text-field" placeholder="Inne (proszę dopisać)" style="margin-top:15px;">
+
+        </div>
+
+        <!-- Pytanie 2 -->
+        <div class="question">
+            <div class="question-title"><span class="question-number">2</span>Jakiego rodzaju treści oczekujesz w ebooku? (możesz zaznaczyć kilka)</div>
+            <div class="checkbox-group">
+                <label class="checkbox-option"><input type="checkbox" name="q2" value="Przykłady i inspiracje z praktyki szkolnej">Przykłady i inspiracje z praktyki szkolnej</label>
+                <label class="checkbox-option"><input type="checkbox" name="q2" value="Instrukcje krok po kroku („jak to zrobić”)">Instrukcje krok po kroku („jak to zrobić”)</label>
+                <label class="checkbox-option"><input type="checkbox" name="q2" value="Teoretyczne wyjaśnienia i definicje">Teoretyczne wyjaśnienia i definicje</label>
+                <label class="checkbox-option"><input type="checkbox" name="q2" value="Gotowe narzędzia i linki">Gotowe narzędzia i linki</label>
+                <label class="checkbox-option"><input type="checkbox" name="q2" value="Scenariusze zajęć i karty pracy">Scenariusze zajęć i karty pracy</label>
+            </div>
+            <input type="text" name="q2_other" class="text-field" placeholder="Inne (proszę dopisać)" style="margin-top:15px;">
+
+        </div>
+
+        <!-- Pytanie 3 -->
+        <div class="question">
+            <div class="question-title"><span class="question-number">3</span>Jakiego poziomu szczegółowości potrzebujesz?</div>
+            <div class="radio-group">
+                <label class="radio-option"><input type="radio" name="q3" value="Bardzo podstawowy (dla początkujących)">Bardzo podstawowy (dla początkujących)</label>
+                <label class="radio-option"><input type="radio" name="q3" value="Średniozaawansowany (praktyczne zastosowania)">Średniozaawansowany (praktyczne zastosowania)</label>
+                <label class="radio-option"><input type="radio" name="q3" value="Zaawansowany (bardziej eksperckie treści)">Zaawansowany (bardziej eksperckie treści)</label>
+            </div>
+            <!-- <input type="text" name="q3_other" class="text-field" placeholder="Inne narzędzia (jakie?)" style="margin-top:15px;"> -->
+        </div>
+
+        <!-- Pytanie 4 -->
+        <div class="question">
+            <div class="question-title"><span class="question-number">4</span>Jakie konkretne narzędzia AI chciał(a)byś zobaczyć w E-booku? (możesz zaznaczyć kilka)</div>
+            <div class="checkbox-group">
+                <label class="checkbox-option"><input type="checkbox" name="q4" value="ChatGPT">ChatGPT</label>
+                <label class="checkbox-option"><input type="checkbox" name="q4" value="Canva AI">Canva AI</label>
+                <label class="checkbox-option"><input type="checkbox" name="q4" value="Copilot (Microsoft/Office)">Copilot (Microsoft/Office)</label>
+                <label class="checkbox-option"><input type="checkbox" name="q4" value="Narzędzia do generowania obrazów (np. DALL·E, Stable Diffusion)">Narzędzia do generowania obrazów (np. DALL·E, Stable Diffusion)</label>
+                <label class="checkbox-option"><input type="checkbox" name="q4" value="Narzędzia do tworzenia quizów/testów z AI">Narzędzia do tworzenia quizów/testów z AI</label>
+
+            </div>
+            <input type="text" name="q4_other" class="text-field" placeholder="Inne (proszę dopisać?)" style="margin-top:15px;">
+        </div>
+
+        <!-- Pytanie 5 -->
+        <div class="question">
+            <div class="question-title"><span class="question-number">5</span>Jakie wyzwania lub problemy w pracy chciał(a)byś rozwiązać dzięki AI? (możesz zaznaczyć kilka)</div>
+            <div class="checkbox-group">
+                <label class="checkbox-option"><input type="checkbox" name="q5" value="Przyspieszenie przygotowania materiałów dydaktycznych">Przyspieszenie przygotowania materiałów dydaktycznych</label>
+                <label class="checkbox-option"><input type="checkbox" name="q5" value="Tworzenie testów i ćwiczeń">Tworzenie testów i ćwiczeń</label>
+                <label class="checkbox-option"><input type="checkbox" name="q5" value="Opracowywanie scenariuszy lekcji">Opracowywanie scenariuszy lekcji</label>
+                <label class="checkbox-option"><input type="checkbox" name="q5" value="Indywidualizacja pracy z uczniem">Indywidualizacja pracy z uczniem</label>
+                <label class="checkbox-option"><input type="checkbox" name="q5" value="Ułatwienie pracy administracyjnej/nadmiar biurokracji">Ułatwienie pracy administracyjnej/nadmiar biurokracji</label>
+            </div>
+            <input type="text" name="q5_other" class="text-field" placeholder="Inne (proszę dopisać?)" style="margin-top:15px;">
+
+        </div>
+
+        <!-- Pytanie 6 -->
+        <div class="question">
+            <div class="question-title"><span class="question-number">6</span>Która forma treści byłaby dla Ciebie najbardziej pomocna? (możesz zaznaczyć kilka)</div>
+            <div class="checkbox-group">
+            <!-- <textarea name="q6" class="textarea-field" placeholder="Opisz tematy, które najbardziej Cię interesują..."></textarea> -->
+            <label class="checkbox-option"><input type="checkbox" name="q6" value="Checklisty i podsumowania">Checklisty i podsumowania</label>
+            <label class="checkbox-option"><input type="checkbox" name="q6" value="Krótkie poradniki krok po kroku">Krótkie poradniki krok po kroku</label>
+            <label class="checkbox-option"><input type="checkbox" name="q6" value="Infografiki, schematy">Infografiki, schematy</label>
+            <label class="checkbox-option"><input type="checkbox" name="q6" value="Opisy case studies">Opisy case studies</label>
+            <label class="checkbox-option"><input type="checkbox" name="q6" value="Gotowe materiały dydaktyczne">Gotowe materiały dydaktyczne</label>
+        </div>
+        <input type="text" name="q6_other" class="text-field" placeholder="Inne (proszę dopisać?)" style="margin-top:15px;">
+
+        <!-- Pytanie 7 -->
+        <div class="question">
+            <div class="question-title"><span class="question-number">7</span>Na ile ważne są dla Ciebie informacje o aspektach prawnych i etycznych korzystania z AI (np. prawa autorskie, RODO, AI Act)?</div>
+            <div class="radio-group">
+                <label class="radio-option"><input type="radio" name="q7" value="Bardzo ważne">Bardzo ważne</label>
+                <label class="radio-option"><input type="radio" name="q7" value="Ważne, ale ogólnie">Ważne, ale ogólnie</label>
+                <label class="radio-option"><input type="radio" name="q7" value="Mało istotne">Mało istotne</label>
+            </div>
+        </div>
+
+        <!-- Pytanie 8 -->
+        <div class="question">
+            <div class="question-title"><span class="question-number">8</span>Czy chciał(a)byś, aby ebook zawierał gotowe scenariusze lekcji lub karty pracy dla uczniów?</div>
+            <div class="radio-group">
+                <label class="radio-option"><input type="radio" name="q8" value="Tak, pełne materiały do wykorzystania">Tak, pełne materiały do wykorzystania</label>
+                <label class="radio-option"><input type="radio" name="q8" value="Tak, ale tylko przykładowe inspiracje">Tak, ale tylko przykładowe inspiracje</label>
+                <label class="radio-option"><input type="radio" name="q8" value="Nie, wolę samodzielnie tworzyć">Nie, wolę samodzielnie tworzyć</label>
+                <!-- <label class="radio-option"><input type="radio" name="q8" value="Wyjaśnienie etyki i bezpieczeństwa">Wyjaśnienie etyki i bezpieczeństwa</label> -->
+            </div>
+        </div>
+
+        <!-- Pytanie 9 -->
+        <div class="question">
+            <div class="question-title"><span class="question-number">9</span>Jak długi powinien być ebook, aby był dla Ciebie użyteczny?</div>
+            <div class="radio-group">
+                <label class="radio-option"><input type="radio" name="q9" value="Krótki przewodnik (10–20 stron)">Krótki przewodnik (10–20 stron)</label>
+                <label class="radio-option"><input type="radio" name="q9" value="Średni (20–40 stron)">Średni (20–40 stron)</label>
+                <label class="radio-option"><input type="radio" name="q9" value="Rozbudowany materiał (powyżej 40 stron)">Rozbudowany materiał (powyżej 40 stron)</label>
+            </div>
+        </div>
+
+        <!-- Pytanie 10 -->
+        <div class="question">
+            <div class="question-title"><span class="question-number">10</span>Co Twoim zdaniem koniecznie powinno znaleźć się w takim ebooku?</div>
+            <div class="checkbox-group">
+                <!-- <textarea name="q6" class="textarea-field" placeholder="Opisz tematy, które najbardziej Cię interesują..."></textarea> -->
+                <label class="checkbox-option"><input type="checkbox" name="q10" value="Praktyczne przykłady z lekcji">Praktyczne przykłady z lekcji</label>
+                <label class="checkbox-option"><input type="checkbox" name="q10" value="Opis sprawdzonych narzędzi">Opis sprawdzonych narzędzi</label>
+                <label class="checkbox-option"><input type="checkbox" name="q10" value="Scenariusze zajęć dla różnych przedmiotów">Scenariusze zajęć dla różnych przedmiotów</label>
+                <label class="checkbox-option"><input type="checkbox" name="q10" value="Poradnik prawno-etyczny">Poradnik prawno-etyczny</label>
+                <label class="checkbox-option"><input type="checkbox" name="q10" value="Wskazówki dotyczące pracy z uczniami nad AI">Wskazówki dotyczące pracy z uczniami nad AI</label>
+            </div>
+            <input type="text" name="q10_other" class="text-field" placeholder="Inne (proszę dopisać?)" style="margin-top:15px;">
+    </div>
+        </div>
+    </form>
+
+    <div class="submit-section">
+        <button type="submit" class="submit-btn" id="submitBtn">Wyślij ankietę</button>
+        <div class="success-message" id="successMessage">
+            ✅ Dziękujemy za wypełnienie ankiety! Twoje odpowiedzi zostały zapisane.
+            <br><br><strong>Dziękujemy<br>Ania & Artur</strong>
+        </div>
+
+        <!-- Panel Administratora -->
+        <div id="adminPanel" class="admin-panel">
+            <h3>🔐 Panel Administratora</h3>
+            <p>Liczba odpowiedzi: <span id="responseCount">0</span></p>
+            <button type="button" class="export-btn" id="exportBtn">📊 Eksportuj wszystkie odpowiedzi</button>
+            <button type="button" class="export-btn delete-btn" id="clearBtn">🗑️ Wyczyść dane</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    /* ===========================================
+       Ankieta AI dla Nauczycieli – skrypt z „Inne”
+       =========================================== */
+    
+    /* --- Konfiguracja --- */
+    const API_URL = 'survey.php';
+    const urlParams  = new URLSearchParams(window.location.search);
+    const isAdmin    = urlParams.get('admin') === 'true';
+    const adminToken = urlParams.get('token') || '';
+    
+    /* Grupy pytań */
+    const RADIO_GROUPS    = ['q1','q3','q7','q8','q9'];       // tylko q1 ma "Inne"
+    const CHECKBOX_GROUPS = ['q2','q4','q5','q6','q10'];      // wszystkie z "Inne"
+    const OTHER_FIELDS    = ['q1_other','q2_other','q4_other','q5_other','q6_other','q10_other'];
+    
+    const $  = (s, r=document)=>r.querySelector(s);
+    const $$ = (s, r=document)=>Array.from(r.querySelectorAll(s));
+    const getRadioValue    = name => { const el = $(`input[name="${name}"]:checked`); return el ? el.value : ''; };
+    const getCheckboxValues= name => $$( `input[name="${name}"]:checked` ).map(e=>e.value);
+    const getInputValue    = name => { const el = $(`[name="${name}"]`); return el && !el.disabled ? (el.value||'').trim() : ''; };
+    
+    /* --- UI: klasy .selected --- */
+    document.addEventListener('change', (e) => {
+      const t = e.target;
+      if (t.matches('input[type="radio"]')) {
+        $$(`input[name="${t.name}"]`).forEach(r => r.closest('.radio-option')?.classList.remove('selected'));
+        t.closest('.radio-option')?.classList.add('selected');
+        // Synchronizacja dostępności „Inne” dla q1
+        if (t.name === 'q1') syncQ1Other();
+        updateProgress();
+      } else if (t.matches('input[type="checkbox"]')) {
+        t.closest('.checkbox-option')?.classList.toggle('selected', t.checked);
+        updateProgress();
+      }
+    });
+    
+    /* Pole „Inne” przy q1: pisanie wyłącza radia i je czyści */
+    const q1OtherEl = document.querySelector('[name="q1_other"]');
+    if (q1OtherEl) {
+      q1OtherEl.addEventListener('input', () => {
+        const v = q1OtherEl.value.trim();
+        if (v.length > 0) {
+          $$('input[name="q1"]').forEach(r => {
+            r.checked = false;
+            r.closest('.radio-option')?.classList.remove('selected');
+          });
+        }
+        syncQ1Other();
+        updateProgress();
+      });
+    }
+    
+    /* Teksty „Inne” w checkboxach – po prostu licz i zapisuj */
+    document.querySelectorAll('input[type="text"], textarea').forEach(el => {
+      if (el.name !== 'q1_other') el.addEventListener('input', updateProgress);
+    });
+    
+    /* Zablokuj/odblokuj q1_other zależnie od stanu radia */
+    function syncQ1Other() {
+      if (!q1OtherEl) return;
+      const anyRadio = !!getRadioValue('q1');
+      if (anyRadio) {
+        q1OtherEl.value = '';
+        q1OtherEl.disabled = true;
+        q1OtherEl.classList.add('disabled');
+      } else {
+        q1OtherEl.disabled = false;
+        q1OtherEl.classList.remove('disabled');
+      }
+    }
+    
+    /* Odtwórz stan zaznaczeń i dostępności na starcie */
+    function initSelectedStates() {
+      $$('input[type="radio"]').forEach(r => { if (r.checked) r.closest('.radio-option')?.classList.add('selected'); });
+      $$('input[type="checkbox"]').forEach(c => { c.closest('.checkbox-option')?.classList.toggle('selected', c.checked); });
+      syncQ1Other();
+    }
+    initSelectedStates();
+    
+    /* --- Pasek postępu --- */
+    function updateProgress(){
+      const total = 10;
+      let answered = 0;
+    
+      // q1: albo radio, albo „Inne” (gdy pole aktywne)
+      const q1Radio = !!getRadioValue('q1');
+      const q1Other = q1OtherEl && !q1OtherEl.disabled && q1OtherEl.value.trim().length > 0;
+      if (q1Radio || q1Other) answered++;
+    
+      // Pozostałe radia
+      ['q3','q7','q8','q9'].forEach(n => { if (getRadioValue(n)) answered++; });
+    
+      // Checkboxy – liczymy, jeśli cokolwiek zaznaczone LUB „Inne” niepuste
+      CHECKBOX_GROUPS.forEach(n => {
+        const hasAny = getCheckboxValues(n).length > 0;
+        const otherEl = $(`[name="${n}_other"]`);
+        const hasOther = otherEl && !otherEl.disabled && otherEl.value.trim().length > 0;
+        if (hasAny || hasOther) answered++;
+      });
+    
+      const pf = document.getElementById('progressFill');
+      if (pf) pf.style.width = (answered / total * 100) + '%';
+    }
+    updateProgress();
+    
+    /* --- Submit --- */
+    document.getElementById('submitBtn')?.addEventListener('click', async (e)=>{
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn'); if (btn) btn.disabled = true;
+    
+      const q1Val   = getRadioValue('q1');
+      const q1Other = q1Val ? '' : getInputValue('q1_other'); // wymuszenie wzajemnego wykluczenia
+    
+      const responses = {
+        q1: q1Val,
+        q1_other: q1Other,
+    
+        q2: getCheckboxValues('q2').join('; '),
+        q2_other: getInputValue('q2_other'),
+    
+        q3: getRadioValue('q3'),
+    
+        q4: getCheckboxValues('q4').join('; '),
+        q4_other: getInputValue('q4_other'),
+    
+        q5: getCheckboxValues('q5').join('; '),
+        q5_other: getInputValue('q5_other'),
+    
+        q6: getCheckboxValues('q6').join('; '),
+        q6_other: getInputValue('q6_other'),
+    
+        q7: getRadioValue('q7'),
+        q8: getRadioValue('q8'),
+        q9: getRadioValue('q9'),
+    
+        q10: getCheckboxValues('q10').join('; '),
+        q10_other: getInputValue('q10_other'),
+    
+        timestamp: new Date().toLocaleString('pl-PL'),
+        id: Date.now()
+      };
+    
+      try{
+        const res = await fetch(`${API_URL}?action=save`,{
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify(responses),
+          cache: 'no-store'
+        });
+        const data = await res.json();
+        if(!data.ok) throw new Error(data.error || 'Błąd zapisu');
+    
+        const okBox = document.getElementById('successMessage');
+        if (okBox) okBox.style.display='block';
+        if (btn) { btn.textContent='Ankieta wysłana ✓'; btn.disabled=true; }
+        if (isAdmin) await refreshAdminCount();
+        okBox?.scrollIntoView({behavior:'smooth'});
+      }catch(err){
+        alert('Wystąpił błąd podczas zapisu. Spróbuj ponownie.\n\nSzczegóły: ' + err.message);
+        console.error(err);
+        if (btn) btn.disabled = false;
+      }
+    });
+    
+    /* --- Panel Admina --- */
+    const adminPanel = document.getElementById('adminPanel');
+    if (isAdmin && adminPanel) {
+      adminPanel.style.display='block';
+      refreshAdminCount();
+      document.getElementById('exportBtn')?.addEventListener('click', exportToExcel);
+      document.getElementById('clearBtn')?.addEventListener('click', clearAllData);
+    }
+    
+    async function fetchAllResponses(){
+      const url = `${API_URL}?action=list&token=${encodeURIComponent(adminToken)}&t=${Date.now()}`;
+      const res = await fetch(url, {cache:'no-store'});
+      if(!res.ok) throw new Error('Błąd pobierania listy');
+      const data = await res.json();
+      if(!data.ok) throw new Error(data.error || 'Błąd listy');
+      return data.data || [];
+    }
+    
+    async function refreshAdminCount(){
+      try{
+        const list = await fetchAllResponses();
+        const el = document.getElementById('responseCount');
+        if (el) el.textContent = list.length;
+        return list;
+      }catch(err){
+        console.error(err);
+        alert('Nie udało się pobrać liczby odpowiedzi (sprawdź token w URL oraz survey.php).');
+        return [];
+      }
+    }
+    
+    /* Autoload XLSX jeśli brakuje i zrób eksport */
+    async function exportToExcel(){
+      try{
+        if (typeof XLSX === 'undefined') {
+          if (!document.getElementById('xlsx-loader')) {
+            const s = document.createElement('script');
+            s.id  = 'xlsx-loader';
+            s.src = 'https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js';
+            s.onload = () => exportToExcel();
+            s.onerror = () => alert('Nie udało się załadować biblioteki XLSX z CDN.');
+            document.head.appendChild(s);
+            alert('Ładuję bibliotekę XLSX z CDN – spróbuj ponownie za chwilę.');
+          }
+          return;
+        }
+    
+        const data = await fetchAllResponses();
+        if (data.length === 0) { alert('Brak danych do eksportu'); return; }
+    
+        const exportData = data.map(r=>({
+          'ID': r.id || '',
+          'Data wypełnienia': r.timestamp || '',
+    
+          '1. Co interesuje Cię w AI w edukacji': r.q1 || '',
+          '1a. Inne (q1)': r.q1_other || '',
+    
+          '2. Jakich treści oczekujesz (ebook)': r.q2 || '',
+          '2a. Inne (q2)': r.q2_other || '',
+    
+          '3. Poziom szczegółowości': r.q3 || '',
+    
+          '4. Konkretnie jakie narzędzia AI': r.q4 || '',
+          '4a. Inne (q4)': r.q4_other || '',
+    
+          '5. Jakie wyzwania chcesz rozwiązać': r.q5 || '',
+          '5a. Inne (q5)': r.q5_other || '',
+    
+          '6. Preferowana forma treści': r.q6 || '',
+          '6a. Inne (q6)': r.q6_other || '',
+    
+          '7. Ważność praw/etyki (RODO/AI Act)': r.q7 || '',
+          '8. Scenariusze/karty pracy w ebooku': r.q8 || '',
+          '9. Długość ebooka': r.q9 || '',
+    
+          '10. Co koniecznie musi być': r.q10 || '',
+          '10a. Inne (q10)': r.q10_other || ''
+        }));
+    
+        const ws = XLSX.utils.json_to_sheet(exportData);
+        ws['!cols'] = [
+          {wch:12},{wch:20},
+          {wch:42},{wch:24},
+          {wch:42},{wch:24},
+          {wch:28},
+          {wch:36},{wch:24},
+          {wch:40},{wch:24},
+          {wch:34},{wch:24},
+          {wch:36},{wch:36},{wch:26},
+          {wch:42},{wch:24}
+        ];
+    
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Ankieta AI');
+        const fileName = `Ankieta_AI_Nauczyciele_${new Date().toISOString().split('T')[0]}.xlsx`;
+        XLSX.writeFile(wb, fileName);
+        alert('Plik Excel został pobrany!');
+      }catch(err){
+        console.error(err);
+        alert('Błąd eksportu: ' + err.message);
+      }
+    }
+    
+    async function clearAllData(){
+      if(!adminToken){ alert('Brak tokenu admina w URL (?token=...)'); return; }
+      if(!confirm('Czy na pewno chcesz usunąć wszystkie odpowiedzi? Tej operacji nie da się cofnąć.')) return;
+      try{
+        const res = await fetch(`${API_URL}?action=clear`,{
+          method:'POST',
+          headers:{'Content-Type':'application/x-www-form-urlencoded'},
+          body: new URLSearchParams({token: adminToken}),
+          cache: 'no-store'
+        });
+        const data = await res.json();
+        if(!data.ok) throw new Error(data.error || 'Błąd czyszczenia');
+        await refreshAdminCount();
+        alert('Wszystkie dane zostały usunięte.');
+      }catch(err){
+        console.error(err);
+        alert('Nie udało się usunąć danych: ' + err.message);
+      }
+    }
+    </script>
+    
+    
+</body>
+</html>
