@@ -306,10 +306,13 @@ async function handleContactSubmit(event) {
     const successMessage = document.getElementById('contact-success');
     if (successMessage) {
       successMessage.classList.remove('hidden');
-      successMessage.style.display = 'block';
-      setTimeout(() => successMessage.classList.add('hidden'), 8000);
+      successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      setTimeout(() => {
+        successMessage.classList.add('hidden');
+      }, 8000);
     }
     form.reset();
+    clearFieldErrors();
   } else {
     console.error('Contact form error:', result.error);
     showMessage(form, 'Wystąpił błąd podczas wysyłania. Spróbuj ponownie za chwilę.', 'error');
