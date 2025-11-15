@@ -19,6 +19,11 @@ const FORMSPREE_ENDPOINT = `https://formspree.io/f/${FORMSPREE_FORM_ID}`;
 // ========================================
 // Helpers
 // ========================================
+function validateEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
 async function submitToFormspree(formData) {
   try {
     const response = await fetch(FORMSPREE_ENDPOINT, {
@@ -90,7 +95,7 @@ function go(tab) {
   const map = {
     home: './index.html',
     products: './products.html', // Jeśli chcesz /produkty → ustaw regułę na serwerze
-    // about: './about.html',
+    about: './about.html',
   };
   window.location.href = map[tab] || './index.html';
 }
