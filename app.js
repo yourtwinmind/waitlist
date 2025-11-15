@@ -88,11 +88,11 @@ function initializeNavigation() {
 // Uproszczony "go" — bez pushState; przekierowanie na pliki .html
 function go(tab) {
   const map = {
-    home: '/index.html',
-    products: '/products.html', // Jeśli chcesz /produkty → ustaw regułę na serwerze
-    about: '/about.html',
+    home: './index.html',
+    products: './products.html', // Jeśli chcesz /produkty → ustaw regułę na serwerze
+    // about: './about.html',
   };
-  window.location.href = map[tab] || '/index.html';
+  window.location.href = map[tab] || './index.html';
 }
 
 // UWAGA: usuwamy SPA-routing, bo powodował pętle / przeładowania.
@@ -249,8 +249,38 @@ async function handleContactSubmit(event) {
   const subject = fd.get('contact-subject');
   const message = fd.get('contact-message');
 
-  if (!name || !email || !subject || !message) return showMessage(form, 'Proszę wypełnić wszystkie pola.', 'error');
-  if (!validateEmail(email)) return showMessage(form, 'Proszę podać prawidłowy adres e-mail.', 'error');
+  // Clear previous errors
+  clearFieldErrors();
+  
+  // Validate each field separately
+  let hasErrors = false;
+  
+  if (!name || name.trim() === '') {
+    showFieldError('name-error');
+    hasErrors = true;
+  }
+  
+  if (!email || email.trim() === '') {
+    showFieldError('email-error');
+    hasErrors = true;
+  } else if (!validateEmail(email)) {
+    showFieldError('email-error');
+    hasErrors = true;
+  }
+  
+  if (!subject || subject.trim() === '') {
+    showFieldError('subject-error');
+    hasErrors = true;
+  }
+  
+  if (!message || message.trim() === '') {
+    showFieldError('message-error');
+    hasErrors = true;
+  }
+  
+  if (hasErrors) {
+    return;
+  }
 
   const submitButton = form.querySelector('button[type="submit"]');
   const originalText = submitButton.textContent;
@@ -268,7 +298,12 @@ async function handleContactSubmit(event) {
 
   const result = await submitToFormspree(payload);
   if (result.success) {
-    showMessage(form, 'Dziękujemy! Wiadomość została wysłana. Odpowiemy wkrótce.', 'success');
+    const successMessage = document.getElementById('contact-success');
+    if (successMessage) {
+      successMessage.classList.remove('hidden');
+      successMessage.style.display = 'block';
+      setTimeout(() => successMessage.classList.add('hidden'), 8000);
+    }
     form.reset();
   } else {
     console.error('Contact form error:', result.error);
@@ -277,6 +312,23 @@ async function handleContactSubmit(event) {
 
   submitButton.textContent = originalText;
   submitButton.disabled = false;
+}
+
+// Helper functions for field-level validation
+function showFieldError(errorId) {
+  const errorElement = document.getElementById(errorId);
+  if (errorElement) {
+    errorElement.classList.remove('hidden');
+    errorElement.style.display = 'block';
+  }
+}
+
+function clearFieldErrors() {
+  const errorElements = document.querySelectorAll('.field-error');
+  errorElements.forEach(el => {
+    el.classList.add('hidden');
+    el.style.display = 'none';
+  });
 }
 
 // ========================================
