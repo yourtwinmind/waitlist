@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10 ChatGPT Promptów dla Mamuś - FREE</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            background: #1a1a1a;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: #FF6B35;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .header .intro {
+            font-size: 1.1em;
+            color: #4a5568;
+            margin-bottom: 15px;
+        }
+
+        .header .intro strong {
+            color: #FF6B35;
+        }
+
+        .header ul {
+            margin: 15px 0 15px 30px;
+            color: #4a5568;
+        }
+
+        .header li {
+            margin: 8px 0;
+        }
+
+        .prompt-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            display: none;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .prompt-card.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .prompt-number {
+            display: inline-block;
+            background: #FF6B35;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .prompt-card h2 {
+            font-size: 2em;
+            color: #2d3748;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .prompt-content {
+            background: #f7fafc;
+            border-left: 4px solid #FF6B35;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            line-height: 1.8;
+            white-space: pre-wrap;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .copy-btn {
+            background: #FF6B35;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.4);
+        }
+
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+
+        .copy-btn.copied {
+            background: #48bb78;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            gap: 20px;
+        }
+
+        .nav-btn {
+            background: white;
+            color: #FF6B35;
+            border: 2px solid #FF6B35;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background: #FF6B35;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .progress {
+            text-align: center;
+            color: #FF6B35;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        .cta-section {
+            background: white;
+            border-radius: 20px;
+            padding: 50px 40px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            display: none;
+        }
+
+        .cta-section.active {
+            display: block;
+        }
+
+        .cta-section h2 {
+            font-size: 2.2em;
+            color: #2d3748;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 1.2em;
+            color: #4a5568;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .cta-btn {
+            background: #FF6B35;
+            color: white;
+            border: none;
+            padding: 20px 50px;
+            border-radius: 50px;
+            font-size: 1.3em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.4);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 50px rgba(255, 107, 53, 0.5);
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 30px;
+            padding: 20px;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .header {
+                padding: 30px 20px;
+            }
+
+            .prompt-card {
+                padding: 30px 20px;
+            }
+
+            .prompt-card h2 {
+                font-size: 1.5em;
+            }
+
+            .navigation {
+                flex-direction: column;
+            }
+
+            .nav-btn {
+                width: 100%;
+            }
+
+            .cta-section {
+                padding: 40px 25px;
+            }
+
+            .cta-section h2 {
+                font-size: 1.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <img src="kreatorka.png" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23FF6B35' d='M30 20 Q 35 15 40 20 L 45 30 Q 40 35 35 30 Z M40 30 Q 45 25 50 30 L 55 45 Q 50 50 45 45 Z M35 50 Q 40 40 45 50 Q 50 55 45 60 Q 40 55 35 50 Z'/%3E%3C/svg%3E" alt="Kreatorka Zmian" style="width: 60px; height: 60px; margin-bottom: 10px;">
+                <div style="font-size: 1.2em; color: #FF6B35; font-weight: 600; letter-spacing: 2px;">KREATORKA ZMIAN</div>
+                <div style="font-size: 0.9em; color: #718096; margin-top: 5px;">Warsztaty tylko dla kobiet</div>
+            </div>
+            <h1>10 ChatGPT Promptów dla Mamuś</h1>
+            <p class="intro"><strong>„Ale ja nie wiem od czego zacząć z tym ChatGPT…"</strong> – jeśli to zdanie brzmi jak coś, co mogłabyś powiedzieć, to jesteś w idealnym miejscu.</p>
+            
+            <p class="intro">Nie musisz być programistką, żeby korzystać z AI.</p>
+            
+            <p class="intro">Pomyśl o ChatGPT jak o bardzo kompetentnej koleżance z pracy, która:</p>
+            <ul>
+                <li>ma czas na każde Twoje pytanie,</li>
+                <li>nie ocenia, że czegoś nie wiesz,</li>
+                <li>odpowiada w kilkanaście sekund.</li>
+            </ul>
+
+            <p class="intro">Ten promptbook to Twój starter pack na powrót do pracy po macierzyńskim.</p>
+            
+            <p class="intro">Znajdziesz tu gotowe formułki, które możesz:</p>
+            <ul>
+                <li>przepisać,</li>
+                <li>wkleić do ChatGPT,</li>
+                <li>lekko dostosować pod swoją sytuację.</li>
+            </ul>
+
+            <p class="intro">Dzięki nim:</p>
+            <ul>
+                <li>przygotowanie do rozmowy kwalifikacyjnej przestaje być trzydniowym stresem,</li>
+                <li>maile do managera piszą się „same",</li>
+                <li>LinkedIn zaczyna wyglądać profesjonalnie,</li>
+                <li>a plan kariery zamienia się z paniki w konkretne kroki.</li>
+            </ul>
+
+            <p class="intro"><strong>Masz prawo czuć się niepewnie po przerwie.</strong></p>
+            <p class="intro"><strong>Masz też prawo wrócić do pracy z poczuciem, że nie jesteś z tym sama.</strong></p>
+            <p class="intro">Ten zestaw promptów jest po to, żeby Ci to ułatwić.</p>
+        </div>
+
+        <!-- Prompt 1 -->
+        <div class="prompt-card active" data-prompt="1">
+            <span class="prompt-number">Prompt 1/10</span>
+            <h2>🎯 Przygotowanie do rozmowy kwalifikacyjnej</h2>
+            <div class="prompt-content">**Situation**
+Jesteś ekspertem w zakresie przygotowania do rozmów kwalifikacyjnych i coachingu kariery, specjalizującym się w pomaganiu kandydatom w przekształcaniu potencjalnych wyzwań w ich CV w mocne strony. Kandydat przygotowuje się do rozmowy kwalifikacyjnej na stanowisko [nazwa] i ma dwuletnią przerwę w karierze związaną z urlopem macierzyńskim.
+
+**Task**
+Wygeneruj dokładnie 5 pytań, które rekruterzy mogą zadać kandydatowi podczas rozmowy kwalifikacyjnej dotyczących dwuletniej przerwy w pracy spowodowanej urlopem macierzyńskim. Do każdego pytania dołącz strategiczną odpowiedź, która pozycjonuje tę przerwę jako atut (asset) dla potencjalnego pracodawcy.
+
+**Objective**
+Przygotować kandydata do pewnego i przekonującego przedstawienia przerwy macierzyńskiej jako okresu rozwoju kompetencji cennych w środowisku zawodowym, eliminując wszelkie obawy rekrutera i wzmacniając pozycję kandydata.
+
+**Knowledge**
+Przerwa w pracy: 2 lata z powodu urlopu macierzyńskiego
+Stanowisko docelowe: [nazwa]
+
+Każda odpowiedź powinna:
+- Uznawać przerwę bezpośrednio i bez defensywności
+- Podkreślać konkretne umiejętności rozwinięte podczas tego okresu (zarządzanie czasem, organizacja, wielozadaniowość, odporność, priorytetyzacja, rozwiązywanie problemów)
+- Łączyć te umiejętności z wymaganiami stanowiska [nazwa]
+- Pokazywać proaktywne podejście do utrzymania aktualności zawodowej
+- Demonstrować motywację i gotowość do pełnego zaangażowania
+
+**Format odpowiedzi:**
+
+Dla każdego z 5 pytań przedstaw:
+
+**Pytanie [numer]:** [treść pytania]
+
+**Strategiczna odpowiedź:**
+[Odpowiedź składająca się z 3-4 zdań, która przekształca przerwę w atut, zawierająca konkretne przykłady kompetencji i ich zastosowanie w kontekście zawodowym]
+
+---
+
+Upewnij się, że pytania są realistyczne i odzwierciedlają rzeczywiste obawy rekruterów, a odpowiedzi są autentyczne, konkretne i bezpośrednio odnoszą się do wartości, jaką kandydat wniesie na stanowisko [nazwa].</div>
+            <button class="copy-btn" onclick="copyPrompt(1)">📋 Kopiuj prompt</button>
+            <div class="navigation">
+                <button class="nav-btn" onclick="previousPrompt()" disabled>← Poprzedni</button>
+                <div class="progress">1 / 10</div>
+                <button class="nav-btn" onclick="nextPrompt()">Następny →</button>
+            </div>
+        </div>
+
+        <!-- Prompt 2 -->
+        <div class="prompt-card" data-prompt="2">
+            <span class="prompt-number">Prompt 2/10</span>
+            <h2>✉️ Email do managera o powrocie</h2>
+            <div class="prompt-content">**Sytuacja**
+Jesteś profesjonalistką powracającą do pracy po urlopie macierzyńskim. Musisz poinformować swojego przyszłego managera o swoim powrocie w sposób, który podkreśla Twoją gotowość, zaangażowanie i profesjonalizm.
+
+**Zadanie**
+Asystent powinien napisać email do przyszłego managera informujący o powrocie do pracy po urlopie macierzyńskim. Email musi być napisany w tonie pewnym siebie, profesjonalnym i entuzjastycznym, zawierać maksymalnie 150 słów i być w języku polskim.
+
+**Cel**
+Stworzyć komunikat, który skutecznie sygnalizuje gotowość do powrotu, buduje pozytywne wrażenie i otwiera drzwi do płynnego przejścia z powrotem do zespołu.
+
+**Wiedza**
+- Email powinien zawierać: linię tematu, formalne powitanie, informację o dacie powrotu, wyrażenie entuzjazmu wobec powrotu, sygnał gotowości do ponownego zaangażowania się w pracę i profesjonalne zakończenie
+- Ton musi balansować między ciepłem a profesjonalizmem
+- Długość: maksymalnie 150 słów (licząc od powitania do podpisu, bez linii tematu)
+- Asystent powinien unikać nadmiernych wyjaśnień dotyczących życia prywatnego
+- Email powinien skupiać się na przyszłości i wartości, jaką pracownik wniesie do zespołu</div>
+            <button class="copy-btn" onclick="copyPrompt(2)">📋 Kopiuj prompt</button>
+            <div class="navigation">
+                <button class="nav-btn" onclick="previousPrompt()">← Poprzedni</button>
+                <div class="progress">2 / 10</div>
+                <button class="nav-btn" onclick="nextPrompt()">Następny →</button>
+            </div>
+        </div>
+
+        <!-- Prompt 3 -->
+        <div class="prompt-card" data-prompt="3">
+            <span class="prompt-number">Prompt 3/10</span>
+            <h2>💼 LinkedIn Bio Update</h2>
+            <div class="prompt-content">**Situation**
+Jesteś profesjonalistą powracającym na rynek pracy po wieloletniej przerwie. Twoje bio na LinkedIn musi przekonać rekruterów i potencjalnych pracodawców, że przerwa była wartościowym doświadczeniem, a nie przeszkodą. Musisz zaprezentować się jako kandydat świadomy współczesnych trendów technologicznych, szczególnie AI i nowoczesnych narzędzi, jednocześnie pokazując gotowość do natychmiastowego wkładu w organizację.
+
+**Task**
+Stwórz zwięzłe, profesjonalne bio na LinkedIn, które w maksymalnie 200 znakach (włącznie ze spacjami) przekaże trzy kluczowe przesłania: transformacyjny charakter przerwy zawodowej, biegłość w AI i nowoczesnych narzędziach oraz pełną gotowość do podjęcia pracy.
+
+**Objective**
+Bio ma pozycjonować użytkownika jako atrakcyjnego kandydata, który łączy doświadczenie zawodowe z nowoczesnymi kompetencjami i świeżą perspektywą nabytą podczas przerwy. Celem jest wzbudzenie zainteresowania rekruterów i otwarcie drzwi do rozmów o możliwościach zawodowych.
+
+**Knowledge**
+- Limit to dokładnie 200 znaków włącznie ze spacjami
+- Bio musi zawierać zawód użytkownika i długość przerwy (oznaczone jako [zawód] i [X] lat)
+- Trzy obowiązkowe elementy: pozytywne przedstawienie przerwy, kompetencje AI/nowe narzędzia, gotowość do pracy
+- Bio na LinkedIn powinno być napisane w pierwszej osobie dla autentyczności
+- Unikaj negatywnych sformułowań związanych z przerwą (np. "mimo przerwy", "wreszcie wracam")
+- Używaj mocnych, aktywnych czasowników i konkretnych odniesień do technologii
+- Każdy znak ma znaczenie - eliminuj słowa wypełniające i zbędne przymiotniki
+
+**Output Requirements**
+Asystent powinien dostarczyć:
+1. Jedno zoptymalizowane bio o długości maksymalnie 200 znaków (ze spacjami)
+2. Dokładne zliczenie znaków pod tekstem w formacie: [X/200 znaków]
+3. Bio musi zawierać wszystkie trzy wymagane elementy w naturalny, przekonujący sposób
+4. Tekst w języku polskim, profesjonalny ton, pierwsza osoba
+5. Jeśli użytkownik poda konkretny zawód i liczbę lat, asystent musi je uwzględnić w ostatecznej wersji</div>
+            <button class="copy-btn" onclick="copyPrompt(3)">📋 Kopiuj prompt</button>
+            <div class="navigation">
+                <button class="nav-btn" onclick="previousPrompt()">← Poprzedni</button>
+                <div class="progress">3 / 10</div>
+                <button class="nav-btn" onclick="nextPrompt()">Następny →</button>
+            </div>
+        </div>
+
+        <!-- Prompt 4 -->
+        <div class="prompt-card" data-prompt="4">
+            <span class="prompt-number">Prompt 4/10</span>
+            <h2>📅 Plan 30 dni przed powrotem</h2>
+            <div class="prompt-content">**Sytuacja**
+Wracasz do pracy za miesiąc po dłuższej przerwie i potrzebujesz uporządkowanego planu przygotowań, który obejmie zarówno rozwój umiejętności technicznych (ze szczególnym uwzględnieniem narzędzi AI), jak i przygotowanie mentalne do powrotu.
+
+**Zadanie**
+Asystent powinien stworzyć szczegółowy 30-dniowy plan przygotowań do powrotu do pracy, podzielony na trzy główne obszary: priorytety edukacyjne, narzędzia AI do opanowania oraz przygotowanie mentalne. Plan musi być przedstawiony w formie konkretnych, wykonalnych punktów bez zbędnych opisów.
+
+**Cel**
+Umożliwienie płynnego i pewnego powrotu do pracy poprzez systematyczne przygotowanie się w kluczowych obszarach kompetencji zawodowych i gotowości psychologicznej.
+
+**Wiedza**
+- Użytkownik ma dokładnie 30 dni na przygotowania
+- Potrzebuje konkretnych, wykonalnych kroków bez długich wyjaśnień
+- Priorytetem są umiejętności praktyczne i narzędzia AI
+- Aspekt mentalny jest równie ważny jak techniczny
+- Format odpowiedzi: punkty, bez rozbudowanych opisów
+
+**Format odpowiedzi**
+Asystent powinien przedstawić plan w następującej strukturze:
+
+**TYDZIEŃ 1 (Dni 1-7)**
+[Konkretne działania dla każdego obszaru]
+**TYDZIEŃ 2 (Dni 8-14)**
+[Konkretne działania dla każdego obszaru]
+**TYDZIEŃ 3 (Dni 15-21)**
+[Konkretne działania dla każdego obszaru]
+**TYDZIEŃ 4 (Dni 22-30)**
+[Konkretne działania dla każdego obszaru]
+
+Każdy tydzień powinien zawierać:
+- 3-5 konkretnych umiejętności/tematów do nauki (priorytetowo)
+- 2-3 narzędzia AI do opanowania z konkretnymi zadaniami
+- 2-3 działania związane z przygotowaniem mentalnym
+
+Asystent powinien:
+- Używać tylko punktów wypunktowanych
+- Podawać konkretne nazwy narzędzi, kursów, technik
+- Unikać ogólników typu "naucz się więcej" - zamiast tego podać "przejdź kurs X na platformie Y"
+- Budować plan progresywnie - od podstaw do zaawansowanych działań
+- Zakładać 2-3 godziny dziennie na realizację planu</div>
+            <button class="copy-btn" onclick="copyPrompt(4)">📋 Kopiuj prompt</button>
+            <div class="navigation">
+                <button class="nav-btn" onclick="previousPrompt()">← Poprzedni</button>
+                <div class="progress">4 / 10</div>
+                <button class="nav-btn" onclick="nextPrompt()">Następny →</button>
+            </div>
+        </div>
+
+        <!-- Prompt 5 -->
+        <div class="prompt-card" data-prompt="5">
+            <span class="prompt-number">Prompt 5/10</span>
+            <h2>🔍 Research Express - Nadrabianie zaległości</h2>
+            <div class="prompt-content">**Sytuacja**
+Jesteś ekspertem w danej branży z umiejętnością tłumaczenia skomplikowanych koncepcji w prosty, przystępny sposób. Twój rozmówca wraca do pracy po dwuletniej przerwie i musi nadrobić zaległości dotyczące nowych narzędzi i trendów, które pojawiły się w tym czasie.
+
+**Zadanie**
+Wyjaśnij wskazane nowe narzędzie lub trend branżowy używając prostego, codziennego języka bez żargonu technicznego. Skup się na praktycznych aspektach i rzeczywistych zastosowaniach, które pomogą osobie szybko zrozumieć istotę tematu.
+
+**Cel**
+Umożliwić osobie powracającej na rynek pracy szybkie i pewne zrozumienie nowego narzędzia lub trendu, tak aby mogła swobodnie uczestniczyć w rozmowach zawodowych i podejmować świadome decyzje dotyczące dalszego rozwoju.
+
+**Wiedza**
+Asystent powinien:
+- Rozpocząć od prostej definicji jednym zdaniem opisującej, czym jest dane narzędzie/trend
+- Wyjaśnić, dlaczego to narzędzie/trend zyskało popularność w ciągu ostatnich dwóch lat
+- Opisać, jakie problemy rozwiązuje i kto z niego korzysta
+- Podać 2-3 konkretne, praktyczne przykłady zastosowania w codziennej pracy
+- Porównać do czegoś znanego sprzed dwóch lat, jeśli to możliwe
+- Zakończyć krótką radą, jak zacząć z tym pracować lub gdzie szukać więcej informacji
+
+Asystent NIE powinien:
+- Używać skrótów branżowych bez wyjaśnienia
+- Zakładać znajomości terminologii, która pojawiła się w ostatnich dwóch latach
+- Wchodzić w szczegóły techniczne niepotrzebne do podstawowego zrozumienia
+- Używać marketingowych haseł lub buzzwordów
+- Pisać dłużej niż 300 słów
+
+Ton wypowiedzi powinien być przyjazny, cierpliwy i wspierający, jak rozmowa z kolegą, który chce pomóc.</div>
+            <button class="copy-btn" onclick="copyPrompt(5)">📋 Kopiuj prompt</button>
+            <div class="navigation">
+                <button class="nav-btn" onclick="previousPrompt()">← Poprzedni</button>
+                <div class="progress">5 / 10</div>
+                <button class="nav-btn" onclick="nextPrompt()">Następny →</button>
+            </div>
+        </div>
+
+        <!-- Prompt 6 -->
+        <div class="prompt-card" data-prompt="6">
+            <span class="prompt-number">Prompt 6/10</span>
+            <h2>💪 Mapa moich mocnych stron</h2>
+            <div class="prompt-content">**Sytuacja**
+Jesteś doświadczonym coachem kariery i psychologiem rozwoju osobistego, specjalizującym się w odkrywaniu mocnych stron kobiet łączących role zawodowe i rodzicielskie. Twoja ekspertyza obejmuje prowadzenie refleksyjnych rozmów, które pomagają klientkom zidentyfikować ich unikalne talenty i wartości w kontekście zarówno pracy, jak i macierzyństwa.
+
+**Zadanie**
+Przeprowadź strukturyzowaną sesję odkrywczą składającą się z serii pytań, które pomogą użytkowniczce zidentyfikować i nazwać jej najmocniejsze strony jako pracownicy i mamy. Następnie na podstawie jej odpowiedzi stwórz spersonalizowaną listę zawierającą dokładnie 5 mocnych stron, 3 konkretne przykłady z życia oraz 2 zdania do autoprezentacji w kontekście zawodowym.
+
+**Cel**
+Umożliwienie użytkowniczce głębszego zrozumienia swoich unikalnych kompetencji i wartości, które przynosi do obu ról, oraz wyposażenie jej w narzędzia do pewnego i autentycznego przedstawiania się w środowisku zawodowym.
+
+**Wiedza**
+Asystent powinien:
+- Zadać 8-12 pytań pogrupowanych tematycznie (np. sukcesy zawodowe, wyzwania rodzicielskie, feedback od innych, wartości, naturalne talenty)
+- Pytania powinny być otwarte, zachęcające do refleksji i konkretnych przykładów
+- Uwzględnić pytania o sytuacje, w których użytkowniczka czuła się dumna, skuteczna lub doceniona
+- Pytać o umiejętności transferowalne między rolą mamy a pracownicy
+- Po otrzymaniu odpowiedzi, przeanalizować je pod kątem powtarzających się wzorców, wartości i kompetencji
+- Mocne strony powinny być nazwane konkretnymi terminami (np. "empatyczne przywództwo", "zarządzanie priorytetami pod presją")
+- Przykłady z życia muszą być oparte na rzeczywistych odpowiedziach użytkowniczki i ilustrować zidentyfikowane mocne strony
+- Zdania do autoprezentacji powinny być zwięzłe (maksymalnie 2 zdania łącznie), profesjonalne i autentyczne, podkreślające kluczowe kompetencje bez bezpośredniego odnoszenia się do macierzyństwa, chyba że użytkowniczka tego oczekuje</div>
+            <button class="copy-btn" onclick="copyPrompt(6)">📋 Kopiuj prompt</button>
+            <div class="navigation">
+                <button class="nav-btn" onclick="previousPrompt()">← Poprzedni</button>
+                <div class="progress">6 / 10</div>
+                <button class="nav-btn" onclick="nextPrompt()">Następny →</button>
+            </div>
+        </div>
+
+        <!-- Prompt 7 -->
+        <div class="prompt-card" data-prompt="7">
+            <span class="prompt-number">Prompt 7/10</span>
+            <h2>⏰ Negocjacja elastycznego grafiku</h2>
+            <div class="prompt-content">**Sytuacja**
+Jesteś doświadczonym konsultantem HR i ekspertem w negocjacjach workplace flexibility, specjalizującym się w przygotowywaniu pracowników do rozmów o elastycznych warunkach pracy po powrocie z urlopu macierzyńskiego. Rozumiesz zarówno perspektywę pracownika, jak i pracodawcy, i potrafisz formułować argumenty, które uwzględniają potrzeby obu stron.
+
+**Zadanie**
+Asystent powinien przygotować kompleksowy materiał do rozmowy o elastycznym grafiku pracy po urlopie macierzyńskim, który zawiera:
+- Dokładnie 3 konkretne propozycje rozwiązań dotyczących godzin pracy i/lub modelu hybrydowego
+- Dla każdej propozycji: zestaw argumentów biznesowych pokazujących korzyści dla pracodawcy
+- Dokładnie 5 zdań komunikacyjnych, które są jednocześnie spokojne, profesjonalne i stanowcze, pozwalające jasno wyrazić swoje potrzeby bez konfrontacji
+
+**Cel**
+Celem jest wyposażenie użytkownika w narzędzia negocjacyjne, które zwiększą jego pewność siebie i szanse na osiągnięcie korzystnego porozumienia z pracodawcą, jednocześnie prezentując elastyczny grafik jako rozwiązanie korzystne dla obu stron.
+
+**Wiedza**
+Asystent powinien uwzględnić następujące aspekty:
+- Propozycje muszą być realistyczne i możliwe do wdrożenia w typowym środowisku korporacyjnym
+- Argumenty biznesowe powinny koncentrować się na mierzalnych korzyściach: produktywność, retencja talentów, oszczędności kosztów, zaangażowanie
+- Zdania komunikacyjne powinny używać technik asertywnej komunikacji, unikając języka przepraszającego lub agresywnego
+- Ton całości powinien być profesjonalny, konstruktywny i nastawiony na współpracę
+- Każda propozycja powinna być przedstawiona jako konkretny, gotowy do wdrożenia plan
+
+**Rezultat**
+Asystent powinien przedstawić materiał w następującej strukturze:
+
+**PROPOZYCJE ROZWIĄZAŃ**
+[Dla każdej z 3 propozycji podać: nazwę rozwiązania, szczegółowy opis godzin/dni pracy, oraz 3-4 konkretne argumenty biznesowe]
+
+**ZDANIA KOMUNIKACYJNE**
+[Lista 5 zdań, każde w osobnej linii, gotowe do użycia w rozmowie]</div>
+            <button class="copy-btn" onclick="copyPrompt(7)">📋 Kopiuj prompt</button>
+            <div class="navigation">
+                <button class="nav-btn" onclick="previousPrompt()">← Poprzedni</button>
+                <div class="progress">7 / 10</div>
+                <button class="nav-btn" onclick="nextPrompt()">Następny →</button>
+            </div>
+        </div>
+
+        <!-- Prompt 8 -->
+        <div class="prompt-card" data-prompt="8">
+            <span class="prompt-number">Prompt 8/10</span>
+            <h2>🧘‍♀️ Reset pewności siebie</h2>
+            <div class="prompt-content">**Sytuacja**
+Jesteś doświadczonym coachem kariery specjalizującym się w wspieraniu osób przechodzących przez trudne momenty zawodowe, ze szczególnym uwzględnieniem pracy z lękami i obawami związanymi z powrotem do aktywności zawodowej. Posiadasz umiejętności aktywnego słuchania, zadawania pytań otwartych i pomagania klientom w odkrywaniu własnych zasobów i rozwiązań.
+
+**Zadanie**
+Asystent powinien przeprowadzić sesję coachingową z użytkownikiem, która pomoże mu przejść przez lęki związane z powrotem do pracy. Sesja powinna składać się z maksymalnie 10 pytań coachingowych zadawanych pojedynczo, z oczekiwaniem na odpowiedź użytkownika po każdym pytaniu przed zadaniem kolejnego.
+
+**Cel**
+Celem sesji jest pomoc użytkownikowi w zidentyfikowaniu i przepracowaniu lęków związanych z powrotem do pracy, rozpoznaniu posiadanych zasobów oraz stworzeniu konkretnego planu działania na najbliższy tydzień.
+
+**Wiedza**
+Asystent powinien stosować techniki coachingu kariery, w tym:
+- Pytania otwarte zaczynające się od "co", "jak", "kiedy"
+- Pytania eksplorujące zasoby i mocne strony klienta
+- Pytania identyfikujące konkretne obawy i ich źródła
+- Pytania prowadzące do działania i małych kroków
+- Unikanie pytań zamkniętych (tak/nie) oraz pytań sugerujących odpowiedź
+- Budowanie bezpiecznej przestrzeni do dzielenia się obawami
+
+Asystent powinien zadawać pytania jedno po drugim, czekając na odpowiedź użytkownika przed przejściem do kolejnego pytania. Pytania powinny naturalnie wynikać z poprzednich odpowiedzi i pogłębiać zrozumienie sytuacji użytkownika.
+
+**Obiektyw**
+Po zakończeniu sesji (maksymalnie 10 pytań) asystent powinien przedstawić strukturalne podsumowanie zawierające:
+
+1. **Co już masz** - lista zidentyfikowanych zasobów, umiejętności, doświadczeń i mocnych stron użytkownika
+2. **Czego się boisz** - konkretne lęki i obawy zidentyfikowane podczas sesji
+3. **Pierwsze 3 małe kroki na ten tydzień** - konkretne, osiągalne działania wynikające z rozmowy, sformułowane w sposób jasny i mierzalny
+
+Podsumowanie powinno być napisane w sposób wspierający, afirmujący i motywujący, odzwierciedlający dokładnie to, co użytkownik powiedział podczas sesji.
+
+Zacznij od pierwszego pytania coachingowego.</div>
+            <button class="copy-btn" onclick="copyPrompt(8)">📋 Kopiuj prompt</button>
+            <div class="navigation">
+                <button class="nav-btn" onclick="previousPrompt()">← Poprzedni</button>
+                <div class="progress">8 / 10</div>
+                <button class="nav-btn" onclick="nextPrompt()">Następny →</button>
+            </div>
+        </div>
+
+        <!-- Prompt 9 -->
+        <div class="prompt-card" data-prompt="9">
+            <span class="prompt-number">Prompt 9/10</span>
+            <h2>📝 Aktualizacja CV 2.0</h2>
+            <div class="prompt-content">**Sytuacja**
+Jesteś doświadczonym doradcą kariery i ekspertem w tworzeniu profesjonalnych CV, specjalizującym się w pomaganiu osobom powracającym na rynek pracy po przerwach zawodowych. Rozumiesz wyzwania związane z przedstawianiem przerw w karierze w pozytywnym świetle oraz potrafisz przekształcić okresy nieobecności w aktywa zawodowe.
+
+**Zadanie**
+Asystent powinien zaktualizować CV użytkownika, koncentrując się na dwóch kluczowych elementach:
+1. Opracować profesjonalne sformułowania opisujące przerwę macierzyńską jako okres rozwoju kompetencji zawodowych
+2. Stworzyć sekcję prezentującą nowe umiejętności nabyte podczas przerwy
+
+Asystent powinien dostarczyć konkretne, gotowe do użycia sformułowania, które można bezpośrednio wstawić do CV.
+
+**Cel**
+Celem jest przedstawienie przerwy zawodowej w sposób, który wzmacnia profil kandydata, pokazuje ciągły rozwój zawodowy oraz podkreśla wartość dodaną nabytych kompetencji, zwiększając tym samym szanse na pozytywne postrzeganie przez potencjalnych pracodawców.
+
+**Wiedza**
+Użytkownik posiada następujące informacje:
+- Zawód/branża: [zawód/branża]
+- Długość przerwy: [X] lat
+- Powód przerwy: urlop macierzyński/rodzicielski
+- Nowe umiejętności do uwzględnienia: AI, organizacja, zarządzanie czasem
+
+Asystent powinien uwzględnić, że przerwy macierzyńskie są coraz częściej postrzegane jako okresy rozwoju kompetencji miękkich i twardych, szczególnie w zakresie zarządzania projektami, wielozadaniowości, adaptacji do nowych technologii oraz efektywnego zarządzania zasobami.
+
+**Wynik**
+Asystent powinien przedstawić:
+
+1. **Sekcję opisującą przerwę zawodową** - 3-5 alternatywnych sformułowań pokazujących przerwę jako okres rozwoju, dostosowanych do różnych stylów komunikacji (formalny, nowoczesny, zwięzły)
+
+2. **Sekcję "Nowe umiejętności" lub "Rozwój kompetencji"** - gotową do wstawienia sekcję CV zawierającą:
+   - Umiejętności związane z AI (np. narzędzia, zastosowania)
+   - Kompetencje organizacyjne
+   - Zarządzanie czasem
+   - Każda umiejętność powinna zawierać krótki opis praktycznego zastosowania
+
+3. **Wskazówki dotyczące formatowania** - sugestie, gdzie w CV umieścić te elementy dla maksymalnego efektu
+
+Wszystkie sformułowania powinny być:
+- Profesjonalne i pozytywne w tonie
+- Konkretne i mierzalne, gdy to możliwe
+- Dostosowane do współczesnych standardów rekrutacyjnych
+- Gotowe do bezpośredniego skopiowania do CV</div>
+            <button class="copy-btn" onclick="copyPrompt(9)">📋 Kopiuj prompt</button>
+            <div class="navigation">
+                <button class="nav-btn" onclick="previousPrompt()">← Poprzedni</button>
+                <div class="progress">9 / 10</div>
+                <button class="nav-btn" onclick="nextPrompt()">Następny →</button>
+            </div>
+        </div>
+
+        <!-- Prompt 10 -->
+        <div class="prompt-card" data-prompt="10">
+            <span class="prompt-number">Prompt 10/10</span>
+            <h2>🚀 Plan na pierwszy tydzień w pracy</h2>
+            <div class="prompt-content">**Sytuacja**
+Wracasz do pracy po przerwie i chcesz zaplanować pierwszy tydzień w sposób, który pozwoli Ci na płynne wejście w obowiązki, budowanie relacji z zespołem oraz efektywne zarządzanie zadaniami bez wpadania w pułapkę perfekcjonizmu.
+
+**Zadanie**
+Asystent powinien stworzyć szczegółowy, dzień po dniu plan na pierwszy tydzień po powrocie do pracy (5 dni roboczych), który będzie zawierał konkretne działania i wskazówki w czterech obszarach: priorytety i uwaga, budowanie relacji z zespołem, unikanie perfekcjonizmu oraz wykorzystanie AI do automatyzacji powtarzalnych zadań.
+
+**Cel**
+Umożliwienie płynnego i zrównoważonego powrotu do pracy poprzez strukturalny plan, który pomoże Ci odbudować rytm pracy, wzmocnić więzi zespołowe, zachować zdrowe podejście do zadań i zwiększyć efektywność dzięki narzędziom AI.
+
+**Wiedza**
+- Pierwszy tydzień po powrocie to kluczowy moment na ponowne zapoznanie się z projektami, priorytetami i dynamiką zespołu
+- Perfekcjonizm często prowadzi do przeciążenia i opóźnień, dlatego ważne jest ustalenie realistycznych standardów
+- AI może znacząco odciążyć w zadaniach takich jak: podsumowywanie emaili, tworzenie notatek ze spotkań, generowanie szablonów, automatyzacja raportów
+- Budowanie relacji wymaga autentyczności i regularnych, nieformalnych interakcji
+- Stopniowe zwiększanie obciążenia w pierwszym tygodniu jest zdrowsze niż natychmiastowe wejście na pełne obroty
+
+**Instrukcje**
+Asystent powinien:
+1. Stworzyć plan obejmujący dokładnie 5 dni roboczych (Poniedziałek - Piątek)
+2. Dla każdego dnia przedstawić 3-5 konkretnych działań podzielonych na cztery kategorie: "Na co zwrócić uwagę", "Budowanie relacji", "Unikanie perfekcjonizmu", "Wykorzystanie AI"
+3. Zapewnić progresję trudności i zaangażowania - dzień 1 powinien być łagodniejszy, a dzień 5 bardziej intensywny
+4. Używać konkretnych, wykonalnych wskazówek zamiast ogólnych rad
+5. Uwzględnić realistyczne ramy czasowe i nie przeciążać żadnego dnia</div>
+            <button class="copy-btn" onclick="copyPrompt(10)">📋 Kopiuj prompt</button>
+            <div class="navigation">
+                <button class="nav-btn" onclick="previousPrompt()">← Poprzedni</button>
+                <div class="progress">10 / 10</div>
+                <button class="nav-btn" onclick="showCTA()">Zobacz co dalej →</button>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h2>🎓 Gotowa na więcej?</h2>
+            <p>Teraz, gdy widzisz jak działają gotowe prompty, czas nauczyć się tworzyć własne!</p>
+            <p style="font-size: 1.15em; margin: 30px 0;"><strong>To nie jest kolejny teoretyczny webinar.</strong><br>To praktyczny warsztat, gdzie wyjdziesz z gotowymi promptami dla SWOJEJ pracy.</p>
+            <div style="background: #f7fafc; padding: 30px; border-radius: 15px; margin: 30px 0; border-left: 4px solid #FF6B35;">
+                <p style="text-align: left; font-size: 1.05em; line-height: 1.8; color: #2d3748;">
+                    <strong style="color: #FF6B35;">Na warsztacie dowiesz się:</strong><br>
+                    ✅ Jak pisać prompty, które działają od razu (bez 10 prób)<br>
+                    ✅ Jak dostosować AI pod SWOJĄ branżę i potrzeby<br>
+                    ✅ Jak zaoszczędzić 10+ godzin tygodniowo dzięki AI<br>
+                    ✅ Konkretne case'y - email, prezentacje, analizy, raporty<br>
+                    ✅ Dostaniesz gotowe szablony do użycia już następnego dnia
+                </p>
+            </div>
+            <p style="font-size: 1.2em; font-weight: 600; color: #2d3748; margin: 25px 0;">Nie musisz być programistką, żeby ogarniać AI!</p>
+            <a href="https://powerskills.ai" class="cta-btn">Sprawdź warsztat Kreatorka Zmian 🚀</a>
+            <p style="margin-top: 30px; color: #718096; font-size: 0.95em;">Warsztaty prowadzone przez PowerSkills.ai<br>Pracujemy z takimi firmami jak Microsoft i Bridgestone</p>
+        </div>
+
+        <div class="footer">
+            <p>Stworzone z ❤️ dla Kreatorek Zmian przez <a href="https://yourtwinmind.xyz" style="color: white; text-decoration: underline;">Your Twin Mind</a></p>
+            <p style="margin-top: 10px; font-size: 0.85em;">Pytania? Napisz do mnie na Instagram: <a href="https://instagram.com/aniamakescontent" style="color: white; text-decoration: underline;">@aniamakescontent</a></p>
+        </div>
+    </div>
+
+    <script>
+        let currentPrompt = 1;
+        const totalPrompts = 10;
+
+        function showPrompt(promptNumber) {
+            // Hide all prompts and CTA
+            document.querySelectorAll('.prompt-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            document.querySelector('.cta-section').classList.remove('active');
+
+            // Show selected prompt
+            const selectedCard = document.querySelector(`[data-prompt="${promptNumber}"]`);
+            if (selectedCard) {
+                selectedCard.classList.add('active');
+                currentPrompt = promptNumber;
+                
+                // Update navigation buttons
+                const prevBtn = selectedCard.querySelector('.nav-btn:first-child');
+                const nextBtn = selectedCard.querySelector('.nav-btn:last-child');
+                
+                if (prevBtn) prevBtn.disabled = (currentPrompt === 1);
+                if (nextBtn && currentPrompt < totalPrompts) {
+                    nextBtn.textContent = 'Następny →';
+                } else if (nextBtn && currentPrompt === totalPrompts) {
+                    nextBtn.textContent = 'Zobacz co dalej →';
+                }
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function nextPrompt() {
+            if (currentPrompt < totalPrompts) {
+                showPrompt(currentPrompt + 1);
+            } else {
+                showCTA();
+            }
+        }
+
+        function previousPrompt() {
+            if (currentPrompt > 1) {
+                showPrompt(currentPrompt - 1);
+            }
+        }
+
+        function showCTA() {
+            document.querySelectorAll('.prompt-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            document.querySelector('.cta-section').classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function copyPrompt(promptNumber) {
+            const card = document.querySelector(`[data-prompt="${promptNumber}"]`);
+            const promptText = card.querySelector('.prompt-content').textContent;
+            const button = card.querySelector('.copy-btn');
+            
+            navigator.clipboard.writeText(promptText).then(() => {
+                const originalText = button.textContent;
+                button.textContent = '✅ Skopiowano!';
+                button.classList.add('copied');
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('Błąd kopiowania:', err);
+                alert('Nie udało się skopiować. Spróbuj zaznacz tekst ręcznie.');
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            showPrompt(1);
+        });
+    </script>
+</body>
+</html>
