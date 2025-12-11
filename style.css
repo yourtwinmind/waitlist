@@ -1560,6 +1560,59 @@ a {
 }
 
 /* ========================================
+   Language Switcher
+   ======================================== */
+.header__right {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.language-switcher {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: all 0.3s ease;
+}
+
+.language-switcher:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.lang-btn {
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 500;
+  font-size: 0.875rem;
+  text-decoration: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  letter-spacing: 0.02em;
+}
+
+.lang-btn:hover {
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.lang-btn.active {
+  color: var(--color-teal-300);
+  font-weight: 600;
+  background: rgba(50, 184, 198, 0.1);
+}
+
+.lang-separator {
+  color: rgba(255, 255, 255, 0.3);
+  font-weight: 300;
+  user-select: none;
+}
+
+/* ========================================
    Simple Header (for subpages)
    ======================================== */
 .header--simple {
@@ -1603,7 +1656,17 @@ a {
     text-align: center;
   }
   
+  .header--simple .header__right {
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+  }
+  
   .header--simple .navigation {
+    justify-content: center;
+  }
+  
+  .language-switcher {
     justify-content: center;
   }
 }
@@ -1611,6 +1674,15 @@ a {
 @media (max-width: 480px) {
   .header--simple .header__top {
     padding: 20px 0;
+  }
+  
+  .header__right {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .lang-btn {
+    font-size: 0.813rem;
   }
 }
 
@@ -1633,7 +1705,17 @@ a {
     text-align: center;
   }
   
+  .header__right {
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+  }
+  
   .header__top .navigation {
+    justify-content: center;
+  }
+  
+  .language-switcher {
     justify-content: center;
   }
   
@@ -1665,6 +1747,10 @@ a {
     padding: 20px 0;
   }
   
+  .header__right {
+    gap: 12px;
+  }
+  
   .header__hero-content {
     padding: 40px 15px 60px;
   }
@@ -1681,6 +1767,10 @@ a {
   .hero__cta {
     padding: 14px 32px;
     font-size: 1rem;
+  }
+  
+  .lang-btn {
+    font-size: 0.813rem;
   }
 }
 

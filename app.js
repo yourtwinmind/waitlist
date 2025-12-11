@@ -4,6 +4,57 @@
 // Jeśli chcesz ładne slugi (/produkty), zrób to regułami serwera (.htaccess/Nginx).
 
 // ========================================
+// Language detection and translations
+// ========================================
+function getCurrentLanguage() {
+  return document.documentElement.lang || 'pl';
+}
+
+const translations = {
+  pl: {
+    nameRequired: 'Podaj swoje imię',
+    emailInvalid: 'Podaj prawidłowy adres e-mail',
+    sending: 'Wysyłanie...',
+    saved: 'Zapisano!',
+    notifySuccess: 'Otrzymasz powiadomienie gdy produkt będzie dostępny!',
+    notifyAlreadySubscribed: 'Jesteś już zapisany na powiadomienia dla tego produktu!',
+    errorGeneric: 'Wystąpił błąd podczas wysyłania. Spróbuj ponownie za chwilę.',
+    connectionError: 'Problem z połączeniem internetowym',
+    subjectRequired: 'Proszę podać temat wiadomości',
+    messageRequired: 'Proszę wpisać treść wiadomości',
+    nameFieldError: 'Proszę podać imię i nazwisko',
+    emailFieldError: 'Proszę podać prawidłowy adres e-mail',
+    subjectFieldError: 'Proszę podać temat wiadomości',
+    messageFieldError: 'Proszę wpisać treść wiadomości',
+    contactSuccessMessage: '✓ Dziękujemy za wiadomość! Odpowiemy wkrótce.',
+    sendButton: 'Wyślij wiadomość'
+  },
+  en: {
+    nameRequired: 'Please enter your name',
+    emailInvalid: 'Please enter a valid email address',
+    sending: 'Sending...',
+    saved: 'Saved!',
+    notifySuccess: 'You will receive a notification when the product is available!',
+    notifyAlreadySubscribed: 'You are already subscribed to notifications for this product!',
+    errorGeneric: 'An error occurred while sending. Please try again in a moment.',
+    connectionError: 'Connection problem',
+    subjectRequired: 'Please enter a subject',
+    messageRequired: 'Please enter your message',
+    nameFieldError: 'Please enter your name',
+    emailFieldError: 'Please enter a valid email address',
+    subjectFieldError: 'Please enter a subject',
+    messageFieldError: 'Please enter your message',
+    contactSuccessMessage: '✓ Thank you for your message! We\'ll respond shortly.',
+    sendButton: 'Send message'
+  }
+};
+
+function t(key) {
+  const lang = getCurrentLanguage();
+  return translations[lang]?.[key] || translations['pl'][key];
+}
+
+// ========================================
 // In-memory data (no localStorage)
 // ========================================
 let waitlistData = [];
@@ -41,13 +92,13 @@ async function submitToFormspree(formData) {
       const errorData = await response.json().catch(() => ({}));
       return { 
         success: false, 
-        error: errorData.error || errorData.errors || 'Błąd serwera',
+        error: errorData.error || errorData.errors || t('errorGeneric'),
         status: response.status 
       };
     }
   } catch (error) {
     console.error('Błąd połączenia z Formspree:', error);
-    return { success: false, error: 'Problem z połączeniem internetowym' };
+    return { success: false, error: t('connectionError') };
   }
 }
 
@@ -289,7 +340,7 @@ async function handleContactSubmit(event) {
 
   const submitButton = form.querySelector('button[type="submit"]');
   const originalText = submitButton.textContent;
-  submitButton.textContent = 'Wysyłanie...';
+  submitButton.textContent = t('sending');
   submitButton.disabled = true;
 
   const payload = {
@@ -298,7 +349,7 @@ async function handleContactSubmit(event) {
     _to: 'yourtwinmind@gmail.com',  // docelowy email odbiorczy
     source: 'Your Twin Mind Contact Form',
     timestamp: new Date().toISOString(),
-    language: 'pl'
+    language: getCurrentLanguage()
   };
 
   const result = await submitToFormspree(payload);
@@ -315,7 +366,7 @@ async function handleContactSubmit(event) {
     clearFieldErrors();
   } else {
     console.error('Contact form error:', result.error);
-    showMessage(form, 'Wystąpił błąd podczas wysyłania. Spróbuj ponownie za chwilę.', 'error');
+    showMessage(form, t('errorGeneric'), 'error');
   }
 
   submitButton.textContent = originalText;
@@ -388,13 +439,13 @@ function setupNotifyButtons() {
 
 function handleProductNotification(productName, button) {
   const existing = productNotifications.find(n => n.product === productName);
-  if (existing) return showProductNotification('Jesteś już zapisany na powiadomienia dla tego produktu!', 'info');
+  if (existing) return showProductNotification(t('notifyAlreadySubscribed'), 'info');
 
   const entry = { id: Date.now(), product: productName, timestamp: new Date().toISOString() };
   productNotifications.push(entry);
 
   const originalText = button.textContent;
-  button.textContent = 'Zapisano!';
+  button.textContent = t('saved');
   button.disabled = true;
   button.style.backgroundColor = '#21808d';
   button.style.color = '#f8fafd';
@@ -407,7 +458,7 @@ function handleProductNotification(productName, button) {
     button.style.borderColor = '';
   }, 3000);
 
-  showProductNotification('Otrzymasz powiadomienie gdy produkt będzie dostępny!', 'success');
+  showProductNotification(t('notifySuccess'), 'success');
 }
 
 function showProductNotification(message, type) {
