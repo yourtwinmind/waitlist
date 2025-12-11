@@ -757,8 +757,8 @@ Asystent powinien:
                     nextBtn.textContent = 'Zobacz co dalej →';
                 }
                 
-                // Scroll to top
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                // Scroll to prompt card (not to top of page)
+                selectedCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }
 
@@ -780,8 +780,9 @@ Asystent powinien:
             document.querySelectorAll('.prompt-card').forEach(card => {
                 card.classList.remove('active');
             });
-            document.querySelector('.cta-section').classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            const ctaSection = document.querySelector('.cta-section');
+            ctaSection.classList.add('active');
+            ctaSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         function copyPrompt(promptNumber) {
